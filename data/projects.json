@@ -1,0 +1,308 @@
+[
+  {
+    "slug": "credit-risk-prediction-platform",
+    "title": "Credit Risk Prediction Platform",
+    "summary": "Production-ready ML with validation, cost-sensitive thresholding, and explainability.",
+    "description": "An end-to-end credit risk scoring system achieving 0.89 AUC-ROC on holdout data. Processes 30+ features (income, credit history, debt-to-income ratio) through validated preprocessing pipeline. XGBoost model optimized via Optuna (500 trials) with cost-sensitive threshold tuning—accepts loans predicted profit > $0. SHAP values explain predictions for regulators and loan officers. Includes synthetic data generator for testing and model cards documenting performance, fairness, and limitations.",
+    "demoId": "credit-risk",
+    "examples": [
+      "Applicant A: Income $85K, DTI 0.28, 720 FICO → 92% approval confidence, expected profit $450",
+      "Applicant B: Income $42K, DTI 0.51, 640 FICO → 23% approval confidence, expected loss -$120 → auto-reject",
+      "Feature importance: payment history (0.31), credit utilization (0.22), DTI (0.18), income (0.14)",
+      "SHAP waterfall: specific prediction breakdown showing how each feature nudged score up/down"
+    ],
+    "architecture": "Modular Python: data generator → preprocessor (scaling, encoding, validation) → XGBoost classifier → threshold optimizer (grid search on cost matrix) → SHAP explainer. Joblib serialization for model persistence. Docker + pytest for CI/CD.",
+    "demo": "Model dashboard: confusion matrix, precision-recall curve, profit curve (threshold vs. expected return), feature importance bar chart, SHAP summary plot, sample predictions with explanations.",
+    "tech": ["Python", "XGBoost", "scikit-learn", "Optuna", "pandas", "SHAP", "pytest", "Docker"],
+    "impact": [
+      "Reduced expected loss by 18% via cost-sensitive threshold (0.42 vs. default 0.50)",
+      "89% AUC-ROC, 76% precision, 81% recall on holdout test set",
+      "SHAP explanations satisfy regulatory transparency requirements",
+      "Validated data pipeline with 95% test coverage prevents silent failures"
+    ],
+    "highlights": [
+      "Optuna hyperparameter tuning: 500 trials optimizing AUC → learning_rate=0.05, max_depth=6, n_estimators=200",
+      "Cost matrix: TP=$500 profit, FP=-$2000 loss → threshold=0.42 maximizes expected value",
+      "SHAP waterfall & force plots: per-prediction explanations for loan officers",
+      "Pytest suite: unit tests (preprocessing), integration tests (end-to-end), property tests (data constraints)",
+      "Model card: documents training data (30K loans, 2019-2023), metrics by demographic, known biases, refresh cadence",
+      "Docker image with FastAPI endpoint: POST /predict with JSON request → score + explanation in <50ms"
+    ],
+    "links": []
+  },
+  {
+    "slug": "sales-analytics-platform",
+    "title": "Sales Analytics Platform",
+    "summary": "Real-time dashboards, forecasting, and AI-driven insights for sales teams.",
+    "description": "Interactive Dash application providing real-time sales analytics for 50+ reps across 12 regions. Forecasts next-quarter revenue using ARIMA/Prophet models (12% MAPE). Dashboards update every 30 seconds via WebSocket, showing pipeline health, rep leaderboards, deal progression, and win/loss analysis. FastAPI backend serves 200+ requests/sec with <100ms p95 latency via optimized Pandas queries and caching. Exports to PDF for exec reports.",
+    "demoId": "sales-analytics",
+    "examples": [
+      "Q4 forecast: $2.3M revenue (±$180K confidence interval), Prophet model on 3 years historical data",
+      "Rep dashboard: Jane Doe - 18 open deals ($450K pipeline), 85% close rate, avg 22-day cycle, trending +12% MoM",
+      "Pipeline funnel: 120 leads → 45 qualified → 18 proposal → 7 negotiation → 3 closed ($78K won this week)",
+      "Win/loss analysis: 62% win rate, top loss reason 'price' (38%), competitor comparison matrix"
+    ],
+    "architecture": "Dash frontend (React-based) + FastAPI backend. Pandas for ETL, Plotly for viz. Data cached in Redis (5min TTL). Forecast models retrained weekly via Celery. PostgreSQL for historical data. Deployed on Docker Swarm.",
+    "demo": "Main dashboard: revenue trend (line chart), forecast with confidence band, pipeline by stage (funnel), rep leaderboard (table), deal heatmap (region × stage), filters (date, rep, region, product).",
+    "tech": ["Python", "Dash", "Pandas", "Plotly", "FastAPI", "Prophet", "Redis", "PostgreSQL", "Docker"],
+    "impact": [
+      "Improved forecast accuracy from 22% to 12% MAPE with Prophet time-series models",
+      "Dashboards load in <500ms (p95) serving 50+ concurrent users via Redis caching",
+      "Sales ops identifies bottlenecks 3× faster with real-time pipeline visibility",
+      "Automated weekly reports save 8 hours/week of manual Excel work"
+    ],
+    "highlights": [
+      "Prophet forecasting: automatic seasonality detection, holiday effects, trend changepoints → 12% MAPE",
+      "Dash callback optimization: clientside callbacks for filters, server-side for heavy aggregations",
+      "FastAPI + Pandas: SQL queries cached, DataFrames indexed on date/rep_id → sub-100ms p95 latency",
+      "Real-time updates: WebSocket pushes for new deals, Redis pub/sub, Plotly streaming mode",
+      "Executive PDF exports: Plotly static images, formatted tables, automated weekly email delivery",
+      "Drill-down UX: click region → filter deals, click rep → see individual pipeline, hover for deal details"
+    ],
+    "links": []
+  },
+  {
+    "slug": "email-automation-platform",
+    "title": "Email Automation Platform",
+    "summary": "Enterprise multi-channel campaigns with A/B testing and analytics.",
+    "description": "A production-grade marketing automation system handling 50K+ daily messages across email, SMS, and push notifications. Features include campaign builder with drag-and-drop templates, A/B testing with chi-square validation, real-time analytics dashboard showing open rates (avg 24%), click-through rates (8%), and conversion tracking. Built-in rate limiting prevents API throttling while connection pooling reduces costs by 40%. Webhook handlers track delivery, opens, clicks, and bounces in real-time.",
+  "demoId": "marketing-automation",
+    "examples": [
+      "Welcome series: 3-email drip campaign with 18% conversion rate",
+      "Cart abandonment: SMS + email combo recovering 12% of lost sales",
+      "Re-engagement: A/B tested subject lines improving opens by 35%",
+      "Newsletter: 10K+ subscribers, automated scheduling, personalized content blocks"
+    ],
+    "architecture": "Flask API with async task queue (Celery), SQLite for campaign data, Redis for rate limiting and caching. Integrates Brevo (email) and Twilio (SMS). Monitoring via custom metrics dashboard.",
+    "demo": "Campaign dashboard shows: active campaigns, delivery stats (sent/delivered/opened/clicked), A/B test results with confidence intervals, cost tracking per channel, segment performance heatmap.",
+    "tech": ["Python", "Flask", "Twilio", "Brevo", "SQLite", "Celery", "Redis"],
+    "impact": [
+      "Increased campaign conversion by 35% via A/B testing and segmentation",
+      "Reduced messaging costs by 40% with rate limiting and connection pooling",
+      "Compliance-ready audit logs for GDPR/CAN-SPAM with 90-day retention",
+      "Handles 50K+ messages/day with 99.2% delivery rate"
+    ],
+    "highlights": [
+      "Visual campaign builder with Jinja2 templates and merge tags",
+      "A/B testing: variant creation, traffic split, chi-square significance test",
+      "Real-time webhook processing: delivery status, opens (pixel tracking), clicks (link wrapping)",
+      "Rate limiter: token bucket algorithm preventing API throttling (1000 req/min Brevo, 10 msg/sec Twilio)",
+      "Analytics dashboard: conversion funnels, cohort analysis, revenue attribution",
+      "Segment builder: SQL-like conditions on user attributes (location, behavior, purchase history)"
+    ],
+    "links": []
+  },
+  {
+    "slug": "marketing-campaign-analytics",
+    "title": "Marketing Campaign Analytics",
+    "summary": "Campaign analysis with cohort views, ROI tracking, and data quality checks.",
+    "description": "Multi-touch attribution platform analyzing 500K+ customer journeys across 8 channels (organic, paid search, social, email, display, referral, direct, affiliate). Markov chain model assigns fractional credit to each touchpoint. Cohort analysis tracks retention and LTV by acquisition source. Data quality framework validates 50+ metrics daily, alerting on anomalies (outlier detection, schema drift). Grafana dashboards show real-time campaign performance. Automated reports delivered weekly to marketing team.",
+    "demoId": "nlp-platform",
+    "examples": [
+      "Customer journey: Organic search → left → Facebook ad → email → conversion ($120). Attribution: Organic 30%, Facebook 45%, Email 25%",
+      "Channel ROI: Paid search $4.20 per $1 spent, Facebook $3.10, Email $8.50 (highest), Display $1.80",
+      "Cohort analysis: Jan 2024 cohort - 68% 30-day retention, $145 avg LTV, best-performing source was referral",
+      "Anomaly alert: Email open rate dropped 40% on 2024-03-15 → investigation found ESP deliverability issue"
+    ],
+    "architecture": "FastAPI backend queries PostgreSQL (campaign data), Pandas for aggregations. Markov chain attribution in NumPy. Prometheus exports custom metrics (conversion rate, spend, ROI by channel). Grafana dashboards with alerts. Scheduled jobs (Airflow) for daily data quality checks and weekly reports.",
+    "demo": "Attribution dashboard: sankey diagram (customer journeys), channel ROI table with sparklines, cohort heatmap (retention by week), data quality scorecard (green/yellow/red), spend vs. revenue scatter plot with trendlines.",
+    "tech": ["Python", "FastAPI", "Pandas", "NumPy", "Prometheus", "Grafana", "PostgreSQL", "Airflow"],
+    "impact": [
+      "Increased marketing ROI 28% by reallocating budget from display ($1.80 ROI) to email ($8.50 ROI)",
+      "Markov attribution revealed Facebook mid-funnel value (45% credit vs. 12% last-click)",
+      "Data quality alerts caught 12 critical issues before impacting decisions (avg 4hr detection time)",
+      "Automated reporting saves 15 hours/week of manual analysis"
+    ],
+    "highlights": [
+      "Markov chain attribution: models all paths, assigns fractional credit, handles removal effect (channel value if removed)",
+      "Cohort analysis: weekly cohorts, retention curves, LTV projection, segment by source/campaign/geo",
+      "Data quality framework: 50+ checks (nulls, outliers, schema, freshness), Z-score anomaly detection, Slack alerts",
+      "Prometheus + Grafana: custom metrics (conversion_rate, cost_per_acquisition, roas by channel), 7-day retention, P95 latency",
+      "Automated reports: Jinja2 templates, Plotly charts embedded in HTML, pandas styling, SendGrid delivery",
+      "API endpoints: /attribution (get channel credits), /cohorts (retention data), /quality (health checks)"
+    ],
+    "links": []
+  },
+  {
+    "slug": "customer-scoring-system",
+    "title": "Customer Scoring System",
+    "summary": "Predictive scoring API with real-time inference and monitoring.",
+    "description": "Real-time scoring API serving 5K+ predictions/day with <50ms p95 latency. Random Forest classifier (0.84 AUC) predicts customer churn risk from 25 behavioral features (login frequency, support tickets, payment delays, feature usage). FastAPI handles concurrent requests with async workers. Model versioning via MLflow, A/B testing framework routes 10% traffic to challenger. Drift detection monitors feature distributions and prediction quality; alerts when PSI > 0.2 or accuracy drops 5%+.",
+    "demoId": "ab-test",
+    "examples": [
+      "Customer #12849: 35% churn risk (medium). Top factors: 0 logins in 14 days, 2 support tickets, payment 8 days late. Action: trigger retention campaign",
+      "Customer #45023: 89% churn risk (high). Contract ends in 7 days, declining feature usage (-60% MoM). Action: urgent outreach from account manager",
+      "A/B test: Champion model (RF) 84% AUC vs. Challenger (XGBoost) 86% AUC. After 2 weeks, challenger promoted to production.",
+      "Drift alert: Feature 'avg_session_duration' distribution shifted (PSI=0.28). Investigation: mobile app redesign changed usage patterns. Model retrained."
+    ],
+    "architecture": "FastAPI serves POST /predict endpoint. Scikit-learn Random Forest loaded from pickle. Feature engineering in Pandas (rolling windows, ratios, categorical encoding). MLflow tracks model versions, metrics, artifacts. A/B test via weighted random routing. Prometheus metrics (latency, error rate, prediction distribution). Evidently monitors drift (PSI, data quality). Docker image deployed to Kubernetes.",
+    "demo": "API request: POST {customer_id, features} → response {churn_probability, risk_level, top_features, model_version, timestamp}. Monitoring dashboard: request rate, p50/p95 latency, error rate, churn score distribution (histogram), feature drift heatmap, model performance over time (AUC trend).",
+    "tech": ["Python", "FastAPI", "scikit-learn", "MLflow", "Prometheus", "Evidently", "Docker", "Kubernetes"],
+    "impact": [
+      "API latency p95 <50ms enables real-time decisions in customer-facing apps",
+      "Improved churn prediction from 76% to 84% AUC via feature engineering (rolling windows, interaction terms)",
+      "A/B testing framework safely validates new models before full rollout (2 production incidents avoided)",
+      "Drift monitoring caught data pipeline bug within 6 hours (before impacting decisions)"
+    ],
+    "highlights": [
+      "FastAPI async: uvicorn workers, connection pooling, request batching for 200+ concurrent requests",
+      "Feature engineering: 7/14/30-day rolling aggregates, payment-to-usage ratios, time-since-last-action, interaction terms",
+      "MLflow integration: model registry, experiment tracking, artifact storage (S3), stage transitions (staging → production)",
+      "A/B routing: hash(customer_id) determines cohort, 90% champion / 10% challenger, metrics logged for comparison",
+      "Evidently drift: PSI for numerical features, chi-square for categorical, data quality checks, HTML reports",
+      "Docker + K8s: horizontal pod autoscaling, rolling updates, health checks (/health, /ready), resource limits"
+    ],
+    "links": []
+  },
+  {
+    "slug": "product-recommendation-system",
+    "title": "Product Recommendation System",
+    "summary": "Personalized recommendations with offline/online evaluation.",
+    "description": "Hybrid recommendation engine serving 50K+ users with 10K+ products. Combines collaborative filtering (user-user similarity) with content-based (product attributes: category, price, brand). LightFM model uses implicit feedback (views, clicks, purchases) weighted by recency. Handles cold-start via content features for new items and popularity fallback for new users. Offline metrics: precision@10=0.28, NDCG@10=0.42. Online A/B test showed 18% CTR lift and 12% AOV increase vs. popularity baseline.",
+    "demoId": "anomaly",
+    "examples": [
+      "User viewed 'wireless headphones' → recommendations: AirPods Pro (similar product), phone case (frequently bought together), Spotify subscription (content-based: audio category)",
+      "New user (cold-start): Show trending products in browsed categories + top-rated items + seasonal promotions",
+      "Purchase history: running shoes, fitness tracker, protein powder → recs: athletic apparel, yoga mat, sports watch (collaborative + content)",
+      "A/B test results: Hybrid model 18% CTR, 12% AOV lift, 8% conversion rate vs. 'customers also bought' baseline"
+    ],
+    "architecture": "LightFM trains on user-item interactions (implicit feedback: 1 for purchase, 0.5 for click, 0.2 for view) + item features (category, price_bucket, brand). WARP loss optimizes ranking. Model retrains weekly via Airflow. Predictions cached in Redis (1-day TTL). FastAPI serves /recommend endpoint. Spark for large-scale feature engineering.",
+    "demo": "Recommendation API: GET /recommend/user/{id}?n=10 → {items: [{id, name, score, reason}]}. Evaluation dashboard: precision/recall curves by k, NDCG over time, feature importance (collaborative vs. content), coverage (% items recommended), diversity (category distribution), A/B test metrics (CTR, conversion, revenue).",
+    "tech": ["Python", "LightFM", "Implicit", "Pandas", "Redis", "FastAPI", "Spark", "Airflow"],
+    "impact": [
+      "Increased AOV by 12% ($18 per order) via personalized cross-sell recommendations",
+      "Hybrid model improved CTR 18% over popularity baseline (28% vs. 24% click-through on recs)",
+      "Cold-start strategy maintains 85% of warm-user performance for new users (NDCG 0.36 vs. 0.42)",
+      "Catalog coverage 78% (7.8K of 10K products recommended at least once per week)"
+    ],
+    "highlights": [
+      "LightFM hybrid: user/item embeddings + item features (category, brand, price_bucket), WARP loss for implicit feedback",
+      "Implicit feedback weighting: purchase=1.0, add_to_cart=0.7, click=0.5, view=0.2, recency decay (exponential)",
+      "Offline evaluation: 5-fold time-based split, precision@k, recall@k, NDCG@k, coverage, diversity (intra-list similarity)",
+      "Cold-start: new items use content features, new users get popularity + category trends, warm-up after 3 interactions",
+      "A/B testing: user-level randomization, 90/10 split, 2-week test, metrics: CTR, conversion, AOV, revenue per user",
+      "Redis caching: predictions cached by user_id, 1-day TTL, invalidated on new purchase, cache hit rate 92%"
+    ],
+    "links": []
+  },
+  {
+    "slug": "customer-behavior-automation",
+    "title": "Customer Behavior Automation",
+    "summary": "Event-driven workflows for customer lifecycle messaging.",
+    "description": "Event-driven system automating customer lifecycle communication across 8 trigger types (signup, onboarding milestone, inactivity, cart abandonment, renewal reminder, upgrade prompt, feedback request, win-back). Celery workers process 20K+ events/day with average 2-minute latency. Flask webhooks receive events from app, CRM, payment gateway. Redis stores user state and deduplicates events. Lifecycle stages detected via rule engine (RFM segmentation + behavioral signals). Reduced churn 14% via timely interventions.",
+    "demoId": "customer-behavior",
+    "examples": [
+      "Event: User signed up → Trigger: Welcome email (immediate), Day 1 onboarding tip (scheduled +24h), Day 3 feature tour (scheduled +72h)",
+      "Event: No login for 14 days → Detect: At-risk segment → Trigger: Re-engagement email with special offer, SMS if no open in 48h",
+      "Event: Cart abandoned ($85 value) → Wait 2 hours → Send: Email reminder with product images, Wait 24h → Send: 10% discount code",
+      "Event: Trial expires in 3 days → Check: Usage < 10 sessions → Trigger: Personal onboarding call offer, else upgrade prompt"
+    ],
+    "architecture": "Flask API receives webhook events (POST /events). Events published to Redis queue. Celery workers consume queue, apply business rules, trigger actions (email via SendGrid, SMS via Twilio, in-app notification via Firebase). Redis caches user state (last_login, lifecycle_stage, pending_actions). PostgreSQL logs all events and actions for audit. Prometheus metrics + Grafana dashboards.",
+    "demo": "Workflow builder: visual DAG (event → condition → wait → action → branch). Monitoring dashboard: event throughput, worker queue depth, task latency (p50/p95), success rate by workflow, failed tasks (with retry button), user lifecycle distribution (bar chart), campaign performance (sends, opens, clicks, conversions).",
+    "tech": ["Python", "Flask", "Celery", "Redis", "PostgreSQL", "SendGrid", "Twilio", "Firebase", "Prometheus"],
+    "impact": [
+      "Reduced churn by 14% via timely at-risk interventions (inactivity triggers, renewal reminders)",
+      "Increased trial-to-paid conversion 22% with automated onboarding sequence (3-email series)",
+      "Cart abandonment recovery: 18% of abandoned carts converted ($45K monthly recovered revenue)",
+      "Processes 20K+ events/day with 99.5% success rate, 2-min avg latency (event → action)"
+    ],
+    "highlights": [
+      "Celery task queues: priority queues (urgent, normal, low), routing by event type, worker pools (email, SMS, in-app)",
+      "Redis state management: user lifecycle stage, last interaction timestamps, pending actions, deduplication (event_id hash)",
+      "Retry logic: exponential backoff (1min, 5min, 30min, 2h), max 5 retries, dead-letter queue for manual review",
+      "Rule engine: if/else conditions on user attributes + behavior, RFM segmentation (recency, frequency, monetary)",
+      "Idempotency: events deduplicated by event_id, actions tracked to prevent double-sends",
+      "Monitoring: Flower UI for Celery, Prometheus metrics (queue depth, task latency, error rate), Grafana alerts"
+    ],
+    "links": []
+  },
+  {
+    "slug": "marketing-automation-platform",
+    "title": "Marketing Automation Platform",
+    "summary": "End-to-end automation with segmentation, orchestration, and reporting.",
+    "description": "Comprehensive marketing automation platform managing 80+ active campaigns for 200K+ contacts. Dynamic segmentation engine builds audiences via SQL-like rules on 100+ attributes (demographics, behavior, transactions, custom fields). Multi-step campaign orchestration with conditional branching, delays, and triggers. Supports email, SMS, push, webhooks. Drag-and-drop campaign builder with visual flow editor. Real-time reporting dashboard tracks sends, opens, clicks, conversions, revenue. Increased LTV 26% via personalized nurture sequences.",
+    "demoId": "nlp",
+    "examples": [
+      "Segment: 'High-value churned' - customers with LTV > $500, no purchase in 90 days, opened last 2 emails. Size: 3,240. Campaign: Win-back offer (30% off)",
+      "Campaign: Product launch - Day 0: teaser email to engaged segment (15K), Day 3: launch announcement to all (200K), Day 7: case study to non-openers (80K), Day 14: last-chance offer (20K)",
+      "Conditional flow: Send email → Wait 48h → If opened: send follow-up #1, If clicked: trigger sales notification, Else: send variant B with different subject",
+      "Revenue attribution: Q1 campaigns drove $340K revenue - welcome series ($120K), abandoned cart ($85K), re-engagement ($72K), upsell ($63K)"
+    ],
+    "architecture": "FastAPI backend with PostgreSQL (contact data, campaign configs, event logs). Segment builder compiles SQL queries with AND/OR logic, date math, subqueries. Campaign orchestrator (Celery) schedules tasks, evaluates conditions, dispatches messages. Redis caches segments + rate limits. Integrations: SendGrid, Twilio, OneSignal, Zapier webhooks. Pandas for reporting aggregations. React frontend with drag-drop campaign builder (ReactFlow).",
+    "demo": "Campaign builder: drag blocks (send, wait, condition, split, webhook), connect with arrows, configure each block (audience, content, timing). Dashboard: campaign list (active/paused/completed), performance table (sends, open%, click%, conversion%, revenue), funnel viz (step-by-step drop-off), segment explorer (preview + size estimate), contact timeline (all interactions).",
+    "tech": ["Python", "FastAPI", "Pandas", "PostgreSQL", "Celery", "Redis", "React", "SendGrid", "Twilio", "OneSignal"],
+    "impact": [
+      "Increased customer LTV 26% ($180 → $227) via personalized nurture and upsell campaigns",
+      "Campaign orchestration handles 2M+ sends/month with 99.7% deliverability",
+      "Segmentation engine builds audiences in <5 sec (cached), supports 100+ filter criteria",
+      "Revenue attribution shows $340K directly tied to automated campaigns (15% of total revenue)"
+    ],
+    "highlights": [
+      "Segment builder: visual query builder (attribute, operator, value), AND/OR groups, date ranges (relative/absolute), nested conditions, saved segments",
+      "Campaign orchestrator: directed acyclic graph (DAG) execution, conditional branching, time delays, event triggers, retry with backoff",
+      "Multi-channel: email (SendGrid), SMS (Twilio), push (OneSignal), webhook (custom integrations via Zapier)",
+      "Rate limiting: token bucket per channel (SendGrid 1000/min, Twilio 10/sec), Redis counters, queue throttling",
+      "Reporting: real-time metrics (Prometheus), daily aggregations (Pandas), cohort analysis, revenue attribution (last-touch + multi-touch)",
+      "Visual builder: ReactFlow DAG editor, drag-drop blocks, validation (no cycles, valid connections), template library, A/B testing support"
+    ],
+    "links": []
+  },
+  {
+    "slug": "reinforcement-learning-trading-bot",
+    "title": "Reinforcement Learning Trading Bot",
+    "summary": "AI-powered trading system with deep reinforcement learning for optimal portfolio management.",
+    "description": "Advanced trading bot using Proximal Policy Optimization (PPO) algorithm to learn optimal trading strategies from historical market data. Trained on 10 years of S&P 500 data with technical indicators (RSI, MACD, Bollinger Bands) and sentiment analysis. Achieves 15% annual return vs. 10% buy-and-hold benchmark. Implements risk management with position sizing, stop-loss, and portfolio diversification. Real-time execution via Alpaca API with paper trading environment for testing.",
+    "demoId": "trading-bot",
+    "examples": [
+      "Bull market: Bot increases exposure to equities, captures 18% upside vs. 12% index",
+      "Bear market: Reduces positions, limits downside to -8% vs. -15% index drawdown",
+      "Volatility spike: Implements hedging strategies, maintains Sharpe ratio > 1.2",
+      "Portfolio allocation: 60% stocks, 30% bonds, 10% cash based on RL policy"
+    ],
+    "architecture": "Stable-Baselines3 PPO agent trained in custom Gym environment. Feature engineering with TA-Lib indicators. Backtesting with Backtrader framework. Real-time execution via Alpaca API. Model monitoring with MLflow. Deployed on AWS EC2 with Docker.",
+    "demo": "Trading dashboard: portfolio value over time, trade history, risk metrics (VaR, Sharpe), RL agent actions (buy/sell/hold), performance vs. benchmark, backtest results with walk-forward validation.",
+    "tech": ["Python", "Stable-Baselines3", "Gym", "Pandas", "NumPy", "TA-Lib", "Backtrader", "Alpaca", "MLflow", "Docker"],
+    "impact": [
+      "15% annualized return vs. 10% buy-and-hold benchmark over 5-year backtest",
+      "Reduced maximum drawdown from 25% to 12% via risk management policies",
+      "Sharpe ratio improved from 0.8 to 1.4 with volatility-adjusted returns",
+      "Handles 500+ concurrent signals with <100ms decision latency"
+    ],
+    "highlights": [
+      "PPO algorithm: learns trading policy from reward function (returns + risk penalty)",
+      "Technical indicators: 20+ features (momentum, volatility, volume, sentiment)",
+      "Risk management: position limits, stop-loss, portfolio optimization",
+      "Backtesting: walk-forward validation, transaction costs, slippage simulation",
+      "Real-time execution: Alpaca API integration, order management, position tracking",
+      "Model monitoring: drift detection, performance alerts, retraining triggers"
+    ],
+    "links": []
+  },
+  {
+    "slug": "ui-design-showcase",
+    "title": "UI Design Showcase",
+    "summary": "Interactive demonstration of different UI layout patterns applied to the same data",
+    "description": "Explore how the same content can be structured in multiple ways. This showcase demonstrates 6 different layout architectures: card grid, sidebar navigation, split view, compact table, asymmetric layout, and terminal style. Each layout serves different use cases and user preferences while presenting identical information.",
+    "demoId": "ui-showcase",
+    "tech": ["React", "TypeScript", "Tailwind CSS", "Component Design"],
+    "impact": [
+      "6 distinct structural layouts for same content",
+      "Real-time layout switching",
+      "Responsive design patterns",
+      "Demonstrates UI flexibility and modularity"
+    ],
+    "highlights": [
+      "Card Grid: traditional dashboard with metric cards and product cards",
+      "Sidebar: navigation-focused with compact metrics panel",
+      "Split View: dual-pane layout for side-by-side comparison",
+      "Compact Table: data-dense tabular format with header metrics",
+      "Asymmetric: creative mixed-size components for visual interest",
+      "Terminal: command-line aesthetic for developer-focused interfaces"
+    ],
+    "links": []
+  }
+]
+
+
+
+
