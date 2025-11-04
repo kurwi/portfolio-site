@@ -3,14 +3,17 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { FadeIn } from './Animations';
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const t = useTranslations('navigation');
 
   const navLinks = [
-    { label: 'Projects', href: '/projects' },
-    { label: 'Skills', href: '/skills' },
-    { label: 'Contact', href: '/contact' },
+    { label: t('projects'), href: '/projects' },
+    { label: t('skills'), href: '/skills' },
+    { label: t('contact'), href: '/contact' },
   ];
 
   return (
@@ -34,6 +37,9 @@ export function Header() {
               </Link>
             </FadeIn>
           ))}
+          <FadeIn delay={250}>
+            <LanguageSwitcher />
+          </FadeIn>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -61,6 +67,9 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+          <div className="pt-3 border-t border-slate-200">
+            <LanguageSwitcher />
+          </div>
         </nav>
       )}
     </header>

@@ -4,8 +4,14 @@ import Link from 'next/link'
 import { StatsSection } from '@/app/components/StatsSection'
 import { ContactSection } from '@/app/components/ContactSection'
 import { FadeIn, SlideIn, ScaleIn } from '@/app/components/Animations'
+import { useTranslations } from 'next-intl'
 
 export default function HomePage() {
+  const t = useTranslations('hero');
+  const tAbout = useTranslations('about');
+  const tSkills = useTranslations('skills');
+  const tProjects = useTranslations('projects');
+  
   return (
     <main className="container py-16">
       <section className="mb-20">
@@ -18,21 +24,21 @@ export default function HomePage() {
           </FadeIn>
           <SlideIn direction="left" duration={1100} delay={150}>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
-              Hi, I&apos;m <span className="gradient-text">Wojciech Staniszewski</span>
+              Hi, I&apos;m <span className="gradient-text">{t('title')}</span>
             </h1>
           </SlideIn>
           <FadeIn duration={1000} delay={300}>
             <p className="text-xl text-slate-600 leading-relaxed mb-8 max-w-3xl">
-              Python developer with 2+ years of experience creating production-grade ML and data systems. I build end-to-end solutions from data pipelines and trading algorithms to scalable APIs and interactive dashboards, focusing on measurable business impact and clean, maintainable code.
+              {t('description')}
             </p>
           </FadeIn>
           <FadeIn delay={500} duration={1000}>
             <div className="flex gap-4">
               <Link href="/projects" className="px-6 py-3 bg-gradient-to-r from-brand-700 to-brand-800 text-white font-semibold hover:shadow-2xl hover:shadow-brand-700/40 hover:-translate-y-1 transition-all duration-300 border-l-4 border-brand-900">
-                View Projects
+                {t('cta.viewWork')}
               </Link>
               <Link href="/contact" className="px-6 py-3 border-2 border-brand-700 text-brand-800 font-semibold hover:bg-brand-700 hover:text-white transition-all duration-300">
-                Get in Touch
+                {t('cta.contact')}
               </Link>
             </div>
           </FadeIn>
@@ -41,7 +47,7 @@ export default function HomePage() {
 
       <section className="mb-20">
         <SlideIn direction="left">
-          <h2 className="section-title">My Expertise</h2>
+          <h2 className="section-title">{tSkills('title')}</h2>
         </SlideIn>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <ScaleIn delay={0}>
@@ -51,7 +57,7 @@ export default function HomePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-slate-900">Machine Learning</h3>
+              <h3 className="text-lg font-semibold mb-2 text-slate-900">{tSkills('categories.machineLearning')}</h3>
               <p className="text-slate-600">XGBoost, Neural Networks, LogisticRegression, RandomForest, Data Mining, Candlestick Patterns, GPT Signals</p>
             </div>
           </ScaleIn>
@@ -62,7 +68,7 @@ export default function HomePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-slate-900">Data Engineering</h3>
+              <h3 className="text-lg font-semibold mb-2 text-slate-900">{tSkills('categories.dataEngineering')}</h3>
               <p className="text-slate-600">Pipelines, ETL, Pandas, PostgreSQL, Redis, real-time processing, data validation frameworks</p>
             </div>
           </ScaleIn>
@@ -116,7 +122,7 @@ export default function HomePage() {
       <StatsSection />
 
       <section className="mb-20">
-        <h2 className="section-title">9 Production Systems</h2>
+        <h2 className="section-title">{tProjects('title')}</h2>
         <p className="text-lg text-slate-600 mb-12 max-w-2xl">
           From credit risk ML models to trading bots, customer analytics platforms to marketing automation systems—here are the production-grade solutions I&apos;ve built.
         </p>
@@ -127,7 +133,7 @@ export default function HomePage() {
               <h3 className="text-xl font-semibold mb-2">Explore All Projects</h3>
               <p className="text-slate-600 mb-6">Complete collection of 9 projects with technical architecture, business impact, and detailed implementation highlights.</p>
               <Link href="/projects" className="inline-flex items-center gap-2 text-brand-700 font-semibold hover:gap-3 transition-all">
-                View Projects
+                {tProjects('viewDemo')}
               </Link>
             </div>
           </div>

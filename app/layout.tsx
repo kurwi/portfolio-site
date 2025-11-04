@@ -4,6 +4,9 @@ import clsx from 'clsx'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { ClientLayout } from '@/app/components/ClientLayout'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 
 export const metadata: Metadata = {
   title: 'Wojciech Staniszewski — Data & AI Engineer',
@@ -23,7 +26,9 @@ export const metadata: Metadata = {
   }
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const messages = await getMessages();
+  
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -37,9 +42,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className={clsx('min-h-screen bg-white text-slate-900 antialiased transition-colors')}>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+        <NextIntlClientProvider messages={messages}>
+          <LanguageProvider>
+            <ClientLayout>
+              {children}
+            </ClientLayout>
+          </LanguageProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

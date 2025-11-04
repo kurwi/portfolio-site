@@ -1,8 +1,10 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 export default function CreditRiskDemo() {
+  const t = useTranslations('creditRisk');
   const [tab, setTab] = useState<'scoring' | 'portfolio' | 'policies'>('scoring')
   const [form, setForm] = useState({
     name: 'New Applicant',
@@ -195,7 +197,7 @@ export default function CreditRiskDemo() {
             {/* Scoring form */}
             <div className="bg-white col-span-2 border border-slate-200 shadow-sm p-6 rounded-lg">
               <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
-                <h3 className="font-semibold text-slate-900">Applicant Scoring</h3>
+                <h3 className="font-semibold text-slate-900">{t('title')}</h3>
                 <span className="text-[11px] font-medium text-slate-500">Interactive</span>
               </div>
               <div className="grid grid-cols-2 gap-6">
@@ -206,21 +208,21 @@ export default function CreditRiskDemo() {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-bold uppercase text-slate-600">Income ($)</label>
+                      <label className="text-xs font-bold uppercase text-slate-600">{t('form.income')}</label>
                       <input type="number" value={form.income} onChange={e=>setForm({...form, income: Number(e.target.value)})} className="mt-1 w-full border border-slate-300 px-3 py-2 focus:outline-none focus:border-slate-900" />
                     </div>
                     <div>
-                      <label className="text-xs font-bold uppercase text-slate-600">Requested ($)</label>
+                      <label className="text-xs font-bold uppercase text-slate-600">{t('form.loanAmount')}</label>
                       <input type="number" value={form.requested} onChange={e=>setForm({...form, requested: Number(e.target.value)})} className="mt-1 w-full border border-slate-300 px-3 py-2 focus:outline-none focus:border-slate-900" />
                     </div>
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     <div>
-                      <label className="text-xs font-bold uppercase text-slate-600">DTI (%)</label>
+                      <label className="text-xs font-bold uppercase text-slate-600">{t('form.debtToIncomeRatio')}</label>
                       <input type="number" value={Math.round(form.debt_to_income*100)} onChange={e=>setForm({...form, debt_to_income: Number(e.target.value)/100})} className="mt-1 w-full border border-slate-300 px-3 py-2 focus:outline-none focus:border-slate-900" />
                     </div>
                     <div>
-                      <label className="text-xs font-bold uppercase text-slate-600">Credit history (yrs)</label>
+                      <label className="text-xs font-bold uppercase text-slate-600">{t('form.creditHistoryLength')}</label>
                       <input type="number" value={form.credit_history} onChange={e=>setForm({...form, credit_history: Number(e.target.value)})} className="mt-1 w-full border border-slate-300 px-3 py-2 focus:outline-none focus:border-slate-900" />
                     </div>
                     <div>
@@ -235,7 +237,7 @@ export default function CreditRiskDemo() {
                     onClick={()=> setResult(scoreApplicant(form))}
                     className="px-4 py-2.5 bg-blue-700 text-white font-medium text-sm shadow-sm hover:bg-blue-600"
                   >
-                    Score applicant
+                    {t('form.calculateRisk')}
                   </button>
 
                   <div className="mt-6">
