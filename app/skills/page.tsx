@@ -1,4 +1,22 @@
+'use client';
+
 import React from "react";
+import { useLanguageCtx } from "@/contexts/LanguageCtx";
+import { t } from "@/lib/translations";
+
+const categoryKeys = {
+	"Machine Learning Models": "skill.machinelearning",
+	"Trading & Finance": "skill.trading",
+	"Data Science & Engineering": "skill.datascience",
+	"Programming Languages": "skill.programming",
+	"Web Frameworks & APIs": "skill.web",
+	"Databases & Caching": "skill.databases",
+	"DevOps & Infrastructure": "skill.devops",
+	"Monitoring & Testing": "skill.monitoring",
+	"Task Queues & Async": "skill.queues",
+	"Third-Party Integrations": "skill.integrations",
+	"Languages": "skill.languages",
+};
 
 const skills = [
 	{
@@ -101,34 +119,39 @@ const skills = [
 ];
 
 const levelColors: Record<string, string> = {
-	Expert: "bg-brand-600 text-white",
-	Advanced: "bg-brand-500 text-white",
-	Intermediate: "bg-brand-300 text-brand-900",
-	Beginner: "bg-brand-100 text-brand-900 border border-brand-300",
+	Expert: "bg-blue-600 text-white",
+	Advanced: "bg-blue-500 text-white",
+	Intermediate: "bg-blue-400 text-white",
+	Beginner: "bg-blue-300 text-white border border-blue-400",
 };
 
+const skillBadgeStyles = "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700";
+
 export default function SkillsPage() {
+	const { locale } = useLanguageCtx();
+	const title = t('Technical Skills', locale);
+	
 	return (
-		<main className="container py-16">
-			<h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8">
-				<span className="gradient-text">Skills</span>
+		<main className="container py-12">
+			<h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+				<span className="gradient-text">{title}</span>
 			</h1>
-			<div className="grid md:grid-cols-2 gap-10">
+			<div className="grid md:grid-cols-3 gap-6">
 				{skills.map((cat) => (
-					<section key={cat.category} className="mb-8">
-						<h2 className="section-title mb-4">{cat.category}</h2>
-						<ul className="space-y-4">
+					<section key={cat.category} className="mb-6">
+						<h2 className="text-sm font-bold text-blue-700 mb-3 uppercase">{t(categoryKeys[cat.category as keyof typeof categoryKeys], locale)}</h2>
+						<ul className="space-y-2">
 							{cat.items.map((item) => (
-								<li key={item.name} className="card-accent p-4 flex flex-col gap-2">
-									<div className="flex items-center gap-3 flex-wrap">
-										<span className={`badge ${levelColors[item.level] || levelColors.Beginner} font-semibold`}>{item.name}</span>
-										<span className="text-xs font-medium text-brand-700">{item.level}</span>
+								<li key={item.name} className="bg-gradient-to-br from-blue-50 to-brand-50 border-l-4 border-blue-600 p-2 flex flex-col gap-1 rounded text-xs shadow-sm hover:shadow-md hover:scale-105 transition-all duration-200">
+									<div className="flex items-center gap-2 flex-wrap">
+										<span className={`${skillBadgeStyles} font-semibold rounded px-2 py-0.5 text-xs`}>{t(item.name, locale)}</span>
+										<span className="text-xs font-medium text-blue-600">{t(item.level, locale)}</span>
 										{'years' in item && item.years && (
-											<span className="text-xs text-brand-400 ml-2">{item.years}</span>
+											<span className="text-xs text-blue-500">{t(item.years, locale)}</span>
 										)}
 									</div>
 									{'desc' in item && item.desc && (
-										<span className="text-sm text-brand-900 opacity-80 pl-1">{item.desc}</span>
+										<span className="text-xs text-blue-900 opacity-70">{t(`${item.name}.desc`, locale)}</span>
 									)}
 								</li>
 							))}

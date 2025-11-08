@@ -1,8 +1,11 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useLanguageCtx } from '@/contexts/LanguageCtx'
+import { t } from '@/lib/translations'
 
 export default function SalesAnalyticsDemo() {
+  const { locale } = useLanguageCtx()
   const [tab, setTab] = useState<'scoring' | 'pipeline' | 'analytics'>('scoring')
   const [form, setForm] = useState({
     name: 'New Customer',
@@ -20,10 +23,10 @@ export default function SalesAnalyticsDemo() {
   }>(null)
 
   const kpis = [
-    { label: 'Forecast MAPE', value: '8.9%', sub: '30-day horizon' },
-    { label: 'Revenue YoY', value: '+12.4%', sub: 'Trailing 12 months' },
-    { label: 'Pipeline Coverage', value: '3.2x', sub: 'Next quarter' },
-    { label: 'Win Rate', value: '26%', sub: 'Last 90 days' },
+    { label: t('Forecast MAPE', locale), value: '8.9%', sub: t('30-day horizon', locale) },
+    { label: t('Revenue YoY', locale), value: '+12.4%', sub: t('Trailing 12 months', locale) },
+    { label: t('Pipeline Coverage', locale), value: '3.2x', sub: t('Next quarter', locale) },
+    { label: t('Win Rate', locale), value: '26%', sub: t('Last 90 days', locale) },
   ]
 
   const kpiTrends = [
@@ -34,17 +37,17 @@ export default function SalesAnalyticsDemo() {
   ]
 
   const pipeline = [
-    { stage: 'Prospecting', count: 184, value: 920000 },
-    { stage: 'Qualified', count: 132, value: 1450000 },
-    { stage: 'Proposal', count: 74, value: 1180000 },
-    { stage: 'Negotiation', count: 32, value: 640000 },
-    { stage: 'Closed Won', count: 46, value: 790000 },
+    { stage: t('Prospecting', locale), count: 184, value: 920000 },
+    { stage: t('Qualified', locale), count: 132, value: 1450000 },
+    { stage: t('Proposal', locale), count: 74, value: 1180000 },
+    { stage: t('Negotiation', locale), count: 32, value: 640000 },
+    { stage: t('Closed Won', locale), count: 46, value: 790000 },
   ]
 
   const segments = [
-    { name: 'Enterprise', mrr: 420000, churn: 1.1, growth: 6.4 },
-    { name: 'Mid-market', mrr: 280000, churn: 1.9, growth: 4.1 },
-    { name: 'SMB', mrr: 160000, churn: 2.7, growth: 3.2 },
+    { name: t('Enterprise', locale), mrr: 420000, churn: 1.1, growth: 6.4 },
+    { name: t('Mid-market', locale), mrr: 280000, churn: 1.9, growth: 4.1 },
+    { name: t('SMB', locale), mrr: 160000, churn: 2.7, growth: 3.2 },
   ]
 
   const sampleCustomers = [
@@ -124,13 +127,13 @@ export default function SalesAnalyticsDemo() {
           </div>
           <div className="flex-1">
             <h1 className="text-5xl font-black uppercase tracking-tight bg-gradient-to-r from-brand-700 to-brand-900 bg-clip-text text-transparent mb-3">
-              Sales Analytics Platform
+              {t('Sales Analytics Platform', locale)}
             </h1>
             <p className="text-xl text-slate-700 font-semibold mb-4">
-              Enterprise-grade analytics with ML forecasting, churn prediction, and pipeline insights.
+              {t('Enterprise-grade analytics with ML forecasting, churn prediction, and pipeline insights.', locale)}
             </p>
             <div className="inline-block bg-gradient-to-r from-brand-700 to-brand-900 text-white px-5 py-2 font-bold text-sm uppercase tracking-wider shadow-lg">
-              Forecasting • Churn • Cohorts
+              {t('Forecasting • Churn • Cohorts', locale)}
             </div>
           </div>
         </div>
@@ -151,15 +154,15 @@ export default function SalesAnalyticsDemo() {
 
         {/* Tabs */}
         <div className="flex gap-2 mb-8">
-          {(['scoring','pipeline','analytics'] as const).map(t => (
+          {(['scoring','pipeline','analytics'] as const).map(tabKey => (
             <button
-              key={t}
-              onClick={() => setTab(t)}
+              key={tabKey}
+              onClick={() => setTab(tabKey)}
               className={`flex-1 px-6 py-4 font-black uppercase text-sm tracking-wider transition-all ${
-                tab === t ? 'bg-gradient-to-r from-brand-700 to-brand-900 text-white shadow-xl' : 'bg-white text-slate-700 border-2 border-blue-200 hover:border-brand-700'
+                tab === tabKey ? 'bg-gradient-to-r from-brand-700 to-brand-900 text-white shadow-xl' : 'bg-white text-slate-700 border-2 border-blue-200 hover:border-brand-700'
               }`}
             >
-              {t}
+              {tabKey === 'scoring' ? t('Scoring', locale) : tabKey === 'pipeline' ? t('Pipeline', locale) : t('Analytics', locale)}
             </button>
           ))}
         </div>
@@ -169,37 +172,37 @@ export default function SalesAnalyticsDemo() {
           <div className="grid grid-cols-3 gap-6">
             {/* Scoring form */}
             <div className="bg-white col-span-2 border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl p-6">
-              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">Customer Credit Scoring</h3>
+              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">{t('Sales Scoring', locale)}</h3>
               <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
-                    <label className="text-xs font-bold uppercase text-slate-600">Name</label>
+                    <label className="text-xs font-bold uppercase text-slate-600">{t('Name', locale)}</label>
                     <input value={form.name} onChange={e=>setForm({...form, name: e.target.value})} className="mt-1 w-full border-2 border-blue-200 px-3 py-2 focus:outline-none focus:border-brand-700" />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-bold uppercase text-slate-600">Income ($)</label>
+                      <label className="text-xs font-bold uppercase text-slate-600">{t('Income', locale)} ($)</label>
                       <input type="number" value={form.income} onChange={e=>setForm({...form, income: Number(e.target.value)})} className="mt-1 w-full border-2 border-blue-200 px-3 py-2 focus:outline-none focus:border-brand-700" />
                     </div>
                     <div>
-                      <label className="text-xs font-bold uppercase text-slate-600">Requested ($)</label>
+                      <label className="text-xs font-bold uppercase text-slate-600">{t('Requested amount', locale)} ($)</label>
                       <input type="number" value={form.requested} onChange={e=>setForm({...form, requested: Number(e.target.value)})} className="mt-1 w-full border-2 border-blue-200 px-3 py-2 focus:outline-none focus:border-brand-700" />
                     </div>
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     <div>
-                      <label className="text-xs font-bold uppercase text-slate-600">DTI (%)</label>
+                      <label className="text-xs font-bold uppercase text-slate-600">{t('DTI', locale)} (%)</label>
                       <input type="number" value={Math.round(form.debt_to_income*100)} onChange={e=>setForm({...form, debt_to_income: Number(e.target.value)/100})} className="mt-1 w-full border-2 border-blue-200 px-3 py-2 focus:outline-none focus:border-brand-700" />
                     </div>
                     <div>
-                      <label className="text-xs font-bold uppercase text-slate-600">Credit history (yrs)</label>
+                      <label className="text-xs font-bold uppercase text-slate-600">{t('Credit history (yrs)', locale)}</label>
                       <input type="number" value={form.credit_history} onChange={e=>setForm({...form, credit_history: Number(e.target.value)})} className="mt-1 w-full border-2 border-blue-200 px-3 py-2 focus:outline-none focus:border-brand-700" />
                     </div>
                     <div>
-                      <label className="text-xs font-bold uppercase text-slate-600">Delinquency (12m)</label>
+                      <label className="text-xs font-bold uppercase text-slate-600">{t('Delinquency (12m)', locale)}</label>
                       <select value={form.delinquency_12m} onChange={e=>setForm({...form, delinquency_12m: Number(e.target.value)})} className="mt-1 w-full border-2 border-blue-200 px-3 py-2 focus:outline-none focus:border-brand-700">
-                        <option value={0}>No</option>
-                        <option value={1}>Yes</option>
+                        <option value={0}>{t('No', locale)}</option>
+                        <option value={1}>{t('Yes', locale)}</option>
                       </select>
                     </div>
                   </div>
@@ -207,17 +210,17 @@ export default function SalesAnalyticsDemo() {
                     onClick={()=> setResult(scoreCustomer(form))}
                     className="px-6 py-3 bg-gradient-to-r from-brand-700 to-brand-900 text-white font-black uppercase text-sm shadow-xl hover:shadow-2xl transition-all"
                   >
-                    Score customer
+                    {t('Score customer', locale)}
                   </button>
 
                   <div className="mt-6">
-                    <div className="text-xs font-bold uppercase text-slate-600 mb-2">Or pick a sample (prefills form)</div>
+                    <div className="text-xs font-bold uppercase text-slate-600 mb-2">{t('Or pick a sample (prefills form)', locale)}</div>
                     <div className="space-y-2">
                       {sampleCustomers.map(c => (
                         <button key={c.id} onClick={()=>pickSample(c)} className="w-full text-left p-3 bg-gradient-to-r from-slate-50 to-blue-50 border-2 border-blue-200 hover:border-brand-700 transition-all">
                           <div className="flex items-center justify-between">
                             <div className="font-black text-slate-900">{c.name} <span className="text-xs text-slate-600">({c.id})</span></div>
-                            <div className="text-xs font-semibold text-slate-600">Income ${c.income.toLocaleString()} • DTI {(c.debt_to_income*100).toFixed(0)}%</div>
+                            <div className="text-xs font-semibold text-slate-600">{t('Income', locale)} ${c.income.toLocaleString()} • {t('DTI', locale)} {(c.debt_to_income*100).toFixed(0)}%</div>
                           </div>
                         </button>
                       ))}
@@ -227,19 +230,19 @@ export default function SalesAnalyticsDemo() {
                 <div className="space-y-4">
                   <div className="p-5 bg-gradient-to-r from-slate-50 to-blue-50 border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200">
                     <div className="flex items-center justify-between mb-3">
-                      <div className="text-xs font-bold text-slate-600 uppercase">Default probability</div>
+                      <div className="text-xs font-bold text-slate-600 uppercase">{t('Default probability', locale)}</div>
                       {result && (
                         <span className={`px-2 py-1 font-black text-xs uppercase ${
                           result.risk==='LOW'? 'bg-green-100 text-green-800'
                           : result.risk==='MEDIUM'? 'bg-amber-100 text-amber-800'
                           : 'bg-red-100 text-red-800'
-                        }`}>{result.risk}</span>
+                        }`}>{t(result.risk, locale)}</span>
                       )}
                     </div>
                     {result ? (
                       <div>
                         <div className="flex items-end justify-between mb-3">
-                          <div className="text-xs text-slate-600 uppercase font-bold">Probability</div>
+                          <div className="text-xs text-slate-600 uppercase font-bold">{t('Probability', locale)}</div>
                           <div className="text-4xl font-black text-slate-900">{(result.prob*100).toFixed(1)}%</div>
                         </div>
                         <div className="mb-4">
@@ -251,20 +254,20 @@ export default function SalesAnalyticsDemo() {
                             style={{ width: `${Math.round(result.prob*100)}%` }}
                           />
                         </div>
-                        <div className="mt-3 text-sm text-slate-700 font-bold">Decision: <span className="text-slate-900">{result.decision}</span></div>
+                        <div className="mt-3 text-sm text-slate-700 font-bold">{t('Decision', locale)}: <span className="text-slate-900">{t(result.decision, locale)}</span></div>
                       </div>
                     ) : (
-                      <div className="text-slate-600 font-semibold">Enter values and click &quot;Score customer&quot;.</div>
+                      <div className="text-slate-600 font-semibold">{t('Enter values and click', locale)} &quot;{t('Score customer', locale)}&quot;.</div>
                     )}
                   </div>
 
                   <div className="p-5 bg-gradient-to-r from-slate-50 to-blue-50 border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200">
-                    <div className="text-xs font-bold uppercase text-slate-600 mb-2">Expected loss (LGD 40%)</div>
+                    <div className="text-xs font-bold uppercase text-slate-600 mb-2">{t('Expected loss (LGD 40%)', locale)}</div>
                     <div className="text-slate-900 font-black text-3xl">{result ? `$${Math.round(result.prob * form.requested * 0.4).toLocaleString()}` : '—'}</div>
                   </div>
 
                   <div className="p-5 bg-gradient-to-r from-slate-50 to-blue-50 border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200">
-                    <div className="text-xs font-bold uppercase text-slate-600 mb-3">Top risk drivers</div>
+                    <div className="text-xs font-bold uppercase text-slate-600 mb-3">{t('Top risk drivers', locale)}</div>
                     {result ? (
                       <div className="space-y-3">
                         {topDrivers.map(d => (
@@ -280,7 +283,7 @@ export default function SalesAnalyticsDemo() {
                         ))}
                       </div>
                     ) : (
-                      <div className="text-slate-600 font-semibold">No score yet.</div>
+                      <div className="text-slate-600 font-semibold">{t('No score yet', locale)}.</div>
                     )}
                   </div>
                 </div>
@@ -289,7 +292,7 @@ export default function SalesAnalyticsDemo() {
 
             {/* Explainability panel */}
             <div className="bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl p-6">
-              <div className="text-xs font-bold uppercase text-slate-600 mb-3">Model explainability</div>
+              <div className="text-xs font-bold uppercase text-slate-600 mb-3">{t('Model explainability', locale)}</div>
               <div className="h-64 bg-gradient-to-br from-slate-50 to-blue-50 border-2 border-blue-100 flex items-center justify-center">
                 {result ? (
                   <div className="w-full px-4">
@@ -306,16 +309,16 @@ export default function SalesAnalyticsDemo() {
                     })}
                   </div>
                 ) : (
-                  <div className="text-slate-500 font-semibold text-sm">SHAP summary placeholder</div>
+                  <div className="text-slate-500 font-semibold text-sm">{t('SHAP summary plot placeholder', locale)}</div>
                 )}
               </div>
               <div className="mt-4 text-xs text-slate-600 font-semibold">
-                Top drivers: DTI, Credit history, Delinquency 12m, Income
+                {t('Top drivers: DTI, Credit history length, Delinquency 12m, Income stability', locale)}
               </div>
               <div className="mt-6">
-                <div className="text-xs font-bold uppercase text-slate-600 mb-2">Decision thresholds</div>
+                <div className="text-xs font-bold uppercase text-slate-600 mb-2">{t('Decision thresholds', locale)}</div>
                 <ThresholdStrip prob={result?.prob ?? null} />
-                <div className="text-[10px] text-slate-500 font-semibold mt-1">Green: &lt;20% (Approve), Amber: 20–50% (Review), Red: ≥50% (Reject)</div>
+                <div className="text-[10px] text-slate-500 font-semibold mt-1">{t('Green: <20% (Auto-approve), Amber: 20–50% (Manual), Red: ≥50% (Reject)', locale)}</div>
               </div>
             </div>
           </div>
@@ -324,13 +327,13 @@ export default function SalesAnalyticsDemo() {
         {/* Pipeline */}
         {tab === 'pipeline' && (
           <div className="bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl p-6">
-            <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">Sales Pipeline Overview</h3>
+            <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">{t('Sales Pipeline Overview', locale)}</h3>
             <div className="grid grid-cols-5 gap-4">
               {pipeline.map((p, i) => (
                 <div key={i} className="p-4 bg-gradient-to-r from-slate-50 to-blue-50 border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200">
                   <div className="text-xs font-bold uppercase text-slate-500 mb-1">{p.stage}</div>
-                  <div className="text-lg font-black text-slate-900">{p.count} deals</div>
-                  <div className="text-sm font-semibold text-slate-700">${(p.value/1000).toFixed(0)}k value</div>
+                  <div className="text-lg font-black text-slate-900">{p.count} {t('deals', locale)}</div>
+                  <div className="text-sm font-semibold text-slate-700">${(p.value/1000).toFixed(0)}k {t('value', locale)}</div>
                 </div>
               ))}
             </div>
@@ -341,25 +344,25 @@ export default function SalesAnalyticsDemo() {
         {tab === 'analytics' && (
           <div className="grid grid-cols-3 gap-6">
             <div className="col-span-2 bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl p-6">
-              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">Revenue & Performance</h3>
+              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">{t('Revenue & Performance', locale)}</h3>
               <div className="space-y-6">
                 <div>
-                  <h4 className="text-xs font-bold uppercase text-slate-600 mb-3">Revenue trend</h4>
+                  <h4 className="text-xs font-bold uppercase text-slate-600 mb-3">{t('Revenue trend', locale)}</h4>
                   <LineChart series={[2.1, 2.3, 2.5, 2.4, 2.6, 2.8, 2.9, 3.0, 3.1, 3.3, 3.4, 3.6]} color="#2563eb" width={640} height={180} />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold uppercase text-slate-600 mb-3">Win rate by segment</h4>
+                  <h4 className="text-xs font-bold uppercase text-slate-600 mb-3">{t('Win rate by segment', locale)}</h4>
                   <BarChart labels={['Enterprise','Mid-market','SMB']} values={[32, 26, 18]} color="#2563eb" />
                 </div>
               </div>
             </div>
             <div className="bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl p-6">
-              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">Segments</h3>
+              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">{t('Segments', locale)}</h3>
               <div className="space-y-3">
                 {segments.map((s, i) => (
                   <div key={i} className="p-3 bg-gradient-to-r from-slate-50 to-blue-50 border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200">
                     <div className="font-black text-slate-900">{s.name}</div>
-                    <div className="text-sm text-slate-700 font-semibold">MRR ${s.mrr.toLocaleString()} • Churn {s.churn}% • Growth {s.growth}%</div>
+                    <div className="text-sm text-slate-700 font-semibold">{t('MRR', locale)} ${s.mrr.toLocaleString()} • {t('Churn', locale)} {s.churn}% • {t('Growth', locale)} {s.growth}%</div>
                   </div>
                 ))}
               </div>
@@ -493,3 +496,4 @@ function ChartSparkline({ series, color = '#2563eb', width = 240, height = 64 }:
     </svg>
   )
 }
+

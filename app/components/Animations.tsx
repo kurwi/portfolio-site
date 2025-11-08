@@ -256,3 +256,4 @@ export function BounceIn({ children, delay = 0, duration = 1200 }: FadeInProps) 
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useState } from "react";
 
 export function CreditRiskDemo() {
@@ -31,7 +31,7 @@ export function CreditRiskDemo() {
         <h1 className="font-bold">Credit Risk</h1>
         <div className="flex gap-2">
           <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="px-3 py-1 text-sm bg-blue-600 text-white rounded">T</button>
-          <a href="/demos" className="px-3 py-1 text-sm bg-gray-600 text-white rounded">←</a>
+          <a href="/demos" className="px-3 py-1 text-sm bg-gray-600 text-white rounded">�</a>
         </div>
       </nav>
       <div className="flex">
@@ -100,3 +100,4 @@ export function CreditRiskDemo() {
 }
 
 export default CreditRiskDemo;
+

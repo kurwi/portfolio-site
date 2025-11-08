@@ -28,7 +28,9 @@
       "Model card: documents training data (30K loans, 2019-2023), metrics by demographic, known biases, refresh cadence",
       "Docker image with FastAPI endpoint: POST /predict with JSON request → score + explanation in <50ms"
     ],
-    "links": []
+    "links": [
+      { "label": "GitHub Repository", "href": "https://github.com/kurwi" }
+    ]
   },
   {
     "slug": "sales-analytics-platform",
@@ -59,14 +61,16 @@
       "Executive PDF exports: Plotly static images, formatted tables, automated weekly email delivery",
       "Drill-down UX: click region → filter deals, click rep → see individual pipeline, hover for deal details"
     ],
-    "links": []
+    "links": [
+      { "label": "GitHub Repository", "href": "https://github.com/kurwi" }
+    ]
   },
   {
     "slug": "email-automation-platform",
     "title": "Email Automation Platform",
     "summary": "Enterprise multi-channel campaigns with A/B testing and analytics.",
     "description": "A production-grade marketing automation system handling 50K+ daily messages across email, SMS, and push notifications. Features include campaign builder with drag-and-drop templates, A/B testing with chi-square validation, real-time analytics dashboard showing open rates (avg 24%), click-through rates (8%), and conversion tracking. Built-in rate limiting prevents API throttling while connection pooling reduces costs by 40%. Webhook handlers track delivery, opens, clicks, and bounces in real-time.",
-  "demoId": "marketing-automation",
+    "demoId": "marketing-automation",
     "examples": [
       "Welcome series: 3-email drip campaign with 18% conversion rate",
       "Cart abandonment: SMS + email combo recovering 12% of lost sales",
@@ -90,7 +94,9 @@
       "Analytics dashboard: conversion funnels, cohort analysis, revenue attribution",
       "Segment builder: SQL-like conditions on user attributes (location, behavior, purchase history)"
     ],
-    "links": []
+    "links": [
+      { "label": "GitHub Repository", "href": "https://github.com/kurwi" }
+    ]
   },
   {
     "slug": "marketing-campaign-analytics",
@@ -121,7 +127,9 @@
       "Automated reports: Jinja2 templates, Plotly charts embedded in HTML, pandas styling, SendGrid delivery",
       "API endpoints: /attribution (get channel credits), /cohorts (retention data), /quality (health checks)"
     ],
-    "links": []
+    "links": [
+      { "label": "GitHub Repository", "href": "https://github.com/kurwi" }
+    ]
   },
   {
     "slug": "customer-scoring-system",
@@ -152,7 +160,9 @@
       "Evidently drift: PSI for numerical features, chi-square for categorical, data quality checks, HTML reports",
       "Docker + K8s: horizontal pod autoscaling, rolling updates, health checks (/health, /ready), resource limits"
     ],
-    "links": []
+    "links": [
+      { "label": "GitHub Repository", "href": "https://github.com/kurwi" }
+    ]
   },
   {
     "slug": "product-recommendation-system",
@@ -183,7 +193,9 @@
       "A/B testing: user-level randomization, 90/10 split, 2-week test, metrics: CTR, conversion, AOV, revenue per user",
       "Redis caching: predictions cached by user_id, 1-day TTL, invalidated on new purchase, cache hit rate 92%"
     ],
-    "links": []
+    "links": [
+      { "label": "GitHub Repository", "href": "https://github.com/kurwi" }
+    ]
   },
   {
     "slug": "customer-behavior-automation",
@@ -214,7 +226,9 @@
       "Idempotency: events deduplicated by event_id, actions tracked to prevent double-sends",
       "Monitoring: Flower UI for Celery, Prometheus metrics (queue depth, task latency, error rate), Grafana alerts"
     ],
-    "links": []
+    "links": [
+      { "label": "GitHub Repository", "href": "https://github.com/kurwi" }
+    ]
   },
   {
     "slug": "marketing-automation-platform",
@@ -245,7 +259,9 @@
       "Reporting: real-time metrics (Prometheus), daily aggregations (Pandas), cohort analysis, revenue attribution (last-touch + multi-touch)",
       "Visual builder: ReactFlow DAG editor, drag-drop blocks, validation (no cycles, valid connections), template library, A/B testing support"
     ],
-    "links": []
+    "links": [
+      { "label": "GitHub Repository", "href": "https://github.com/kurwi" }
+    ]
   },
   {
     "slug": "reinforcement-learning-trading-bot",
@@ -276,7 +292,9 @@
       "Real-time execution: Alpaca API integration, order management, position tracking",
       "Model monitoring: drift detection, performance alerts, retraining triggers"
     ],
-    "links": []
+    "links": [
+      { "label": "GitHub Repository", "href": "https://github.com/kurwi" }
+    ]
   },
   {
     "slug": "ui-design-showcase",
@@ -299,7 +317,9 @@
       "Asymmetric: creative mixed-size components for visual interest",
       "Terminal: command-line aesthetic for developer-focused interfaces"
     ],
-    "links": []
+    "links": [
+      { "label": "GitHub Repository", "href": "https://github.com/kurwi" }
+    ]
   }
 ]
 

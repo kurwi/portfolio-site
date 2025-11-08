@@ -105,3 +105,4 @@ export function ProjectsGrid({ projects }: { projects: ProjectCard[] }) {
     </div>
   );
 }
+

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useLanguageCtx } from '@/contexts/LanguageCtx'
 
 interface Customer {
   id: number
@@ -14,6 +15,7 @@ interface Customer {
 }
 
 export default function CustomerScoringDemo() {
+  const { locale } = useLanguageCtx()
   const [activeView, setActiveView] = useState('live')
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)
 
@@ -331,6 +333,15 @@ export default function CustomerScoringDemo() {
                         <div className="text-sm text-slate-600 uppercase font-bold mb-1">AUC Score</div>
                         <div className="text-4xl font-black text-blue-600">{abTest.champion_auc}</div>
                       </div>
+                      <div className="pt-2 border-t border-blue-200">
+                        <div className="text-xs text-slate-600 font-semibold mb-2">Key Metrics</div>
+                        <div className="space-y-1 text-sm">
+                          <div className="flex justify-between"><span className="text-slate-600">Precision</span><span className="font-black text-slate-900">0.79</span></div>
+                          <div className="flex justify-between"><span className="text-slate-600">Recall</span><span className="font-black text-slate-900">0.82</span></div>
+                          <div className="flex justify-between"><span className="text-slate-600">F1-Score</span><span className="font-black text-slate-900">0.80</span></div>
+                          <div className="flex justify-between"><span className="text-slate-600">KS Statistic</span><span className="font-black text-slate-900">0.76</span></div>
+                        </div>
+                      </div>
                       <div>
                         <div className="text-sm text-slate-600 uppercase font-bold mb-1">Status</div>
                         <span className="px-3 py-1 bg-green-600 text-white text-xs font-bold uppercase">Production</span>
@@ -353,6 +364,15 @@ export default function CustomerScoringDemo() {
                         <div className="text-sm text-slate-600 uppercase font-bold mb-1">AUC Score</div>
                         <div className="text-4xl font-black text-purple-600">{abTest.challenger_auc}</div>
                       </div>
+                      <div className="pt-2 border-t border-purple-200">
+                        <div className="text-xs text-slate-600 font-semibold mb-2">Key Metrics</div>
+                        <div className="space-y-1 text-sm">
+                          <div className="flex justify-between"><span className="text-slate-600">Precision</span><span className="font-black text-slate-900">0.82</span></div>
+                          <div className="flex justify-between"><span className="text-slate-600">Recall</span><span className="font-black text-slate-900">0.85</span></div>
+                          <div className="flex justify-between"><span className="text-slate-600">F1-Score</span><span className="font-black text-slate-900">0.83</span></div>
+                          <div className="flex justify-between"><span className="text-slate-600">KS Statistic</span><span className="font-black text-slate-900">0.79</span></div>
+                        </div>
+                      </div>
                       <div>
                         <div className="text-sm text-slate-600 uppercase font-bold mb-1">Status</div>
                         <span className="px-3 py-1 bg-yellow-600 text-white text-xs font-bold uppercase">Testing</span>
@@ -366,7 +386,7 @@ export default function CustomerScoringDemo() {
                     <div>
                       <div className="text-sm font-bold text-slate-600 uppercase mb-1">Performance Improvement</div>
                       <div className="text-3xl font-black text-green-600">+2.4%</div>
-                      <div className="text-sm text-slate-700 mt-1 font-semibold">Challenger outperforming by {((abTest.challenger_auc - abTest.champion_auc) * 100).toFixed(1)}%</div>
+                      <div className="text-sm text-slate-700 mt-1 font-semibold">Challenger outperforming by {((abTest.challenger_auc - abTest.champion_auc) * 100).toFixed(1)}% AUC. Statistical significance: 0.94</div>
                     </div>
                     <button className="px-6 py-3 bg-gradient-to-r from-brand-700 to-brand-900 text-white font-black uppercase text-sm hover:shadow-xl transition-all">
                       Promote to Production
@@ -374,18 +394,135 @@ export default function CustomerScoringDemo() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-4 gap-4 mb-6">
                   <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-4 border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200">
                     <div className="text-xs font-bold text-slate-500 uppercase mb-1">Test Duration</div>
                     <div className="text-2xl font-black text-slate-900">{abTest.duration_days} Days</div>
+                    <div className="text-xs text-slate-600 mt-1">Started 14 days ago</div>
                   </div>
                   <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-4 border-l-[6px] border-purple-600 border-t-2 border-r-2 border-b-2 border-blue-200">
                     <div className="text-xs font-bold text-slate-500 uppercase mb-1">Predictions Tested</div>
                     <div className="text-2xl font-black text-slate-900">12.4K</div>
+                    <div className="text-xs text-slate-600 mt-1">Champion: 11.2K / Challenger: 1.2K</div>
                   </div>
                   <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-4 border-l-[6px] border-green-600 border-t-2 border-r-2 border-b-2 border-blue-200">
-                    <div className="text-xs font-bold text-slate-500 uppercase mb-1">Confidence</div>
+                    <div className="text-xs font-bold text-slate-500 uppercase mb-1">Confidence Level</div>
                     <div className="text-2xl font-black text-slate-900">95%</div>
+                    <div className="text-xs text-slate-600 mt-1">P-value: 0.032</div>
+                  </div>
+                  <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-4 border-l-[6px] border-orange-600 border-t-2 border-r-2 border-b-2 border-blue-200">
+                    <div className="text-xs font-bold text-slate-500 uppercase mb-1">Business Impact</div>
+                    <div className="text-2xl font-black text-slate-900">+8.2%</div>
+                    <div className="text-xs text-slate-600 mt-1">Projected churn reduction</div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-6 mb-6">
+                  <div className="bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 p-6">
+                    <h3 className="text-lg font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">Feature Importance Comparison</h3>
+                    <div className="space-y-3 text-sm">
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-slate-700 font-semibold">Payment Delays (Champion: 28% / Challenger: 26%)</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="h-2 bg-blue-100"><div className="h-2 bg-blue-600" style={{width: '56%'}}></div></div>
+                          <div className="h-2 bg-purple-100"><div className="h-2 bg-purple-600" style={{width: '52%'}}></div></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-slate-700 font-semibold">Support Tickets (Champion: 22% / Challenger: 25%)</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="h-2 bg-blue-100"><div className="h-2 bg-blue-600" style={{width: '44%'}}></div></div>
+                          <div className="h-2 bg-purple-100"><div className="h-2 bg-purple-600" style={{width: '50%'}}></div></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-slate-700 font-semibold">Login Frequency (Champion: 18% / Challenger: 20%)</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="h-2 bg-blue-100"><div className="h-2 bg-blue-600" style={{width: '36%'}}></div></div>
+                          <div className="h-2 bg-purple-100"><div className="h-2 bg-purple-600" style={{width: '40%'}}></div></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-slate-700 font-semibold">Feature Usage (Champion: 16% / Challenger: 18%)</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="h-2 bg-blue-100"><div className="h-2 bg-blue-600" style={{width: '32%'}}></div></div>
+                          <div className="h-2 bg-purple-100"><div className="h-2 bg-purple-600" style={{width: '36%'}}></div></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-slate-700 font-semibold">Plan Tier (Champion: 16% / Challenger: 11%)</span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="h-2 bg-blue-100"><div className="h-2 bg-blue-600" style={{width: '32%'}}></div></div>
+                          <div className="h-2 bg-purple-100"><div className="h-2 bg-purple-600" style={{width: '22%'}}></div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 p-6">
+                    <h3 className="text-lg font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">Statistical Analysis</h3>
+                    <div className="space-y-4 text-sm">
+                      <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-3 border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200">
+                        <div className="font-bold text-slate-900 mb-1">Sample Size</div>
+                        <div className="text-slate-700">Champion: 11,235 | Challenger: 1,165</div>
+                        <div className="text-xs text-slate-600 mt-1">Power: 0.89 (Target: 0.80)</div>
+                      </div>
+                      <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-3 border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200">
+                        <div className="font-bold text-slate-900 mb-1">AUC Difference Test</div>
+                        <div className="text-slate-700">Z-statistic: 2.14 | P-value: 0.032</div>
+                        <div className="text-xs text-slate-600 mt-1">Significant at α = 0.05</div>
+                      </div>
+                      <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-3 border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200">
+                        <div className="font-bold text-slate-900 mb-1">95% Confidence Interval</div>
+                        <div className="text-slate-700">AUC Diff: [0.008, 0.036]</div>
+                        <div className="text-xs text-slate-600 mt-1">Excludes zero, result is robust</div>
+                      </div>
+                      <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-3 border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200">
+                        <div className="font-bold text-slate-900 mb-1">Recommended Action</div>
+                        <div className="text-slate-700">Promote Challenger to 50% traffic</div>
+                        <div className="text-xs text-slate-600 mt-1">Meets promotion criteria</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 p-6">
+                  <h3 className="text-lg font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">Business Impact Analysis</h3>
+                  <div className="grid grid-cols-3 gap-4 mb-4">
+                    <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-4 border-l-[6px] border-green-600 border-t-2 border-r-2 border-b-2 border-blue-200">
+                      <div className="text-xs font-bold text-slate-600 uppercase mb-1">Churn Reduction</div>
+                      <div className="text-2xl font-black text-green-600">8.2%</div>
+                      <div className="text-xs text-slate-600 mt-1">If deployed to 100% traffic</div>
+                    </div>
+                    <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-4 border-l-[6px] border-purple-600 border-t-2 border-r-2 border-b-2 border-blue-200">
+                      <div className="text-xs font-bold text-slate-600 uppercase mb-1">Revenue Impact</div>
+                      <div className="text-2xl font-black text-purple-600">+$184K</div>
+                      <div className="text-xs text-slate-600 mt-1">Annual projected gain</div>
+                    </div>
+                    <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-4 border-l-[6px] border-orange-600 border-t-2 border-r-2 border-b-2 border-blue-200">
+                      <div className="text-xs font-bold text-slate-600 uppercase mb-1">Customer Retention</div>
+                      <div className="text-2xl font-black text-orange-600">+45 Accounts</div>
+                      <div className="text-xs text-slate-600 mt-1">Per month projected</div>
+                    </div>
+                  </div>
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 p-4 text-sm">
+                    <div className="font-bold text-slate-900 mb-2">Performance Assumptions:</div>
+                    <ul className="text-slate-700 space-y-1 list-disc list-inside">
+                      <li>Current churn rate: 12.4% annually</li>
+                      <li>Average customer LTV: $22,500</li>
+                      <li>Current customer base: 2,847 active accounts</li>
+                      <li>Assumes causal relationship between model improvements and churn reduction</li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -396,3 +533,4 @@ export default function CustomerScoringDemo() {
     </div>
   )
 }
+

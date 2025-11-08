@@ -1,39 +1,43 @@
 'use client';
 
 import { FadeIn } from '@/app/components/Animations';
+import { useLanguageCtx } from '@/contexts/LanguageCtx';
+import { t } from '@/lib/translations';
 
 export function ContactSection() {
+  const { locale } = useLanguageCtx();
+
   return (
     <section className="py-20 mb-20">
       <div className="container max-w-2xl">
         <FadeIn>
-          <h2 className="section-title mb-6">Let&apos;s Work Together</h2>
+          <h2 className="section-title mb-6">{t('Let\'s Work Together', locale)}</h2>
           <p className="text-lg text-slate-600 mb-12">
-            Have a project in mind? I&apos;d love to hear about it. Drop me a message or connect on social platforms.
+            {t('Have a project in mind? I\'d love to hear about it. Drop me a message or connect on social platforms.', locale)}
           </p>
         </FadeIn>
 
         <FadeIn>
           <div className="bg-gradient-to-br from-blue-50 to-slate-50 p-12 rounded-lg border-2 border-slate-200 mb-12">
-            <h3 className="text-2xl font-semibold text-slate-900 mb-6">Get In Touch</h3>
+            <h3 className="text-2xl font-semibold text-slate-900 mb-6">{t('Get In Touch', locale)}</h3>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              I&apos;d love to hear about your project or collaboration ideas. Feel free to reach out via email or through the contact information below.
+              {t('I\'d love to hear about your project or collaboration ideas. Feel free to reach out via email or through the contact information below.', locale)}
             </p>
             <div className="space-y-6">
               <div>
-                <p className="text-base font-medium text-slate-700 mb-2">Email</p>
+                <p className="text-base font-medium text-slate-700 mb-2">{t('Contact Email', locale)}</p>
                 <a href="mailto:wojciechstaniszewski80@gmail.com" className="text-lg text-brand-600 hover:text-brand-700 font-semibold">
-                  wojciechstaniszewski80@gmail.com
+                  {t('wojciechstaniszewski80@gmail.com', locale)}
                 </a>
               </div>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <p className="text-base font-medium text-slate-700 mb-2">Location</p>
-                  <p className="text-lg text-slate-600">Alicante, Spain</p>
+                  <p className="text-base font-medium text-slate-700 mb-2">{t('Contact Location', locale)}</p>
+                  <p className="text-lg text-slate-600">{t('Alicante, Spain', locale)}</p>
                 </div>
                 <div>
-                  <p className="text-base font-medium text-slate-700 mb-2">Response Time</p>
-                  <p className="text-lg text-slate-600">4-8 hours</p>
+                  <p className="text-base font-medium text-slate-700 mb-2">{t('Response Time', locale)}</p>
+                  <p className="text-lg text-slate-600">{t('4-8 hours', locale)}</p>
                 </div>
               </div>
             </div>
@@ -44,7 +48,7 @@ export function ContactSection() {
           <FadeIn delay={100}>
             <div className="space-y-8">
               <div>
-                <h3 className="font-semibold text-slate-900 mb-4">Connect With Me</h3>
+                <h3 className="font-semibold text-slate-900 mb-4">{t('Connect With Me', locale)}</h3>
                 <div className="flex gap-4">
                   <a
                     href="https://www.linkedin.com/in/wojciech-staniszewski-136631395/"
@@ -87,7 +91,7 @@ export function ContactSection() {
 
               <div className="bg-blue-50 border-l-4 border-brand-500 p-4">
                 <p className="text-sm text-slate-700">
-                  <span className="font-semibold">Available now:</span> I&apos;m currently accepting new projects and collaborations.
+                  {t('Available now: I\'m currently accepting new projects and collaborations.', locale)}
                 </p>
               </div>
             </div>
@@ -97,3 +101,4 @@ export function ContactSection() {
     </section>
   );
 }
+

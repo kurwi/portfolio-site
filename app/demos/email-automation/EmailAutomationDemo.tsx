@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { useLanguageCtx } from '@/contexts/LanguageCtx'
 
 export default function EmailAutomationDemo() {
+  const { locale } = useLanguageCtx()
   const [activeTab, setActiveTab] = useState('campaigns')
   const [selectedCampaign, setSelectedCampaign] = useState('welcome-series')
 
@@ -241,3 +243,4 @@ export default function EmailAutomationDemo() {
     </div>
   )
 }
+

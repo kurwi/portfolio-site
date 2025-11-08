@@ -1,0 +1,278 @@
+export const demoTranslations = {
+  'en': {
+    // Skills page
+    'Technical Skills': 'Technical Skills',
+    'Professional expertise in cutting-edge technologies and Machine Learning frameworks': 'Professional expertise in cutting-edge technologies and Machine Learning frameworks',
+    'Machine Learning Models': 'Machine Learning Models',
+    'Trading & Finance': 'Trading & Finance',
+    'Data Science & Engineering': 'Data Science & Engineering',
+    'Programming Languages': 'Programming Languages',
+    'Web Frameworks & APIs': 'Web Frameworks & APIs',
+    'Databases & Caching': 'Databases & Caching',
+    'DevOps & Cloud': 'DevOps & Cloud',
+    'Languages': 'Languages',
+    'Expert': 'Expert',
+    'Advanced': 'Advanced',
+    'Intermediate': 'Intermediate',
+    'Beginner': 'Beginner',
+    
+    // Product Recommendation Demo
+    'Product Recommendation System': 'Product Recommendation System',
+    'Personalized Shopping Experience': 'Personalized Shopping Experience',
+    'Overview': 'Overview',
+    'Evaluation': 'Evaluation',
+    'Similarity': 'Similarity',
+    'A/B Test': 'A/B Test',
+    'Select User': 'Select User',
+    'Category': 'Category',
+    'All': 'All',
+    'Audio': 'Audio',
+    'Mobile': 'Mobile',
+    'Accessories': 'Accessories',
+    'Fitness': 'Fitness',
+    'Recommendations': 'Recommendations',
+    'Recent Purchases': 'Recent Purchases',
+    'Confidence Score': 'Confidence Score',
+    'Add to Cart': 'Add to Cart',
+    'View Details': 'View Details',
+    
+    // Credit Risk Demo
+    'Credit Risk Prediction': 'Credit Risk Prediction',
+    'Financial Risk Assessment': 'Financial Risk Assessment',
+    'Risk Score': 'Risk Score',
+    'Low Risk': 'Low Risk',
+    'Medium Risk': 'Medium Risk', 
+    'High Risk': 'High Risk',
+    'Analyze': 'Analyze',
+    'Reset': 'Reset',
+    
+    // Common terms
+    'Loading...': 'Loading...',
+    'Error': 'Error',
+    'Success': 'Success',
+    'Processing': 'Processing',
+    'Complete': 'Complete'
+  },
+  
+  'es': {
+    // Skills page
+    'Technical Skills': 'Habilidades Técnicas',
+    'Professional expertise in cutting-edge technologies and Machine Learning frameworks': 'Experiencia profesional en tecnologías de vanguardia y frameworks de Machine Learning',
+    'Machine Learning Models': 'Modelos de Machine Learning',
+    'Trading & Finance': 'Trading y Finanzas',
+    'Data Science & Engineering': 'Ciencia de Datos e Ingeniería',
+    'Programming Languages': 'Lenguajes de Programación',
+    'Web Frameworks & APIs': 'Frameworks Web y APIs',
+    'Databases & Caching': 'Bases de Datos y Caché',
+    'DevOps & Cloud': 'DevOps y Cloud',
+    'Languages': 'Idiomas',
+    'Expert': 'Experto',
+    'Advanced': 'Avanzado',
+    'Intermediate': 'Intermedio',
+    'Beginner': 'Principiante',
+    
+    // Product Recommendation Demo
+    'Product Recommendation System': 'Sistema de Recomendación de Productos',
+    'Personalized Shopping Experience': 'Experiencia de Compra Personalizada',
+    'Overview': 'Resumen',
+    'Evaluation': 'Evaluación',
+    'Similarity': 'Similitud',
+    'A/B Test': 'Prueba A/B',
+    'Select User': 'Seleccionar Usuario',
+    'Category': 'Categoría',
+    'All': 'Todos',
+    'Audio': 'Audio',
+    'Mobile': 'Móvil',
+    'Accessories': 'Accesorios',
+    'Fitness': 'Fitness',
+    'Recommendations': 'Recomendaciones',
+    'Recent Purchases': 'Compras Recientes',
+    'Confidence Score': 'Puntuación de Confianza',
+    'Add to Cart': 'Agregar al Carrito',
+    'View Details': 'Ver Detalles',
+    
+    // Credit Risk Demo
+    'Credit Risk Prediction': 'Predicción de Riesgo Crediticio',
+    'Financial Risk Assessment': 'Evaluación de Riesgo Financiero',
+    'Risk Score': 'Puntuación de Riesgo',
+    'Low Risk': 'Riesgo Bajo',
+    'Medium Risk': 'Riesgo Medio',
+    'High Risk': 'Riesgo Alto',
+    'Analyze': 'Analizar',
+    'Reset': 'Reiniciar',
+    
+    // Common terms
+    'Loading...': 'Cargando...',
+    'Error': 'Error',
+    'Success': 'Éxito',
+    'Processing': 'Procesando',
+    'Complete': 'Completo'
+  },
+  
+  'fr': {
+    // Skills page
+    'Technical Skills': 'Compétences Techniques',
+    'Professional expertise in cutting-edge technologies and Machine Learning frameworks': 'Expertise professionnelle dans les technologies de pointe et les frameworks de Machine Learning',
+    'Machine Learning Models': 'Modèles de Machine Learning',
+    'Trading & Finance': 'Trading et Finance',
+    'Data Science & Engineering': 'Science des Données et Ingénierie',
+    'Programming Languages': 'Langages de Programmation',
+    'Web Frameworks & APIs': 'Frameworks Web et APIs',
+    'Databases & Caching': 'Bases de Données et Mise en Cache',
+    'DevOps & Cloud': 'DevOps et Cloud',
+    'Languages': 'Langues',
+    'Expert': 'Expert',
+    'Advanced': 'Avancé',
+    'Intermediate': 'Intermédiaire',
+    'Beginner': 'Débutant',
+    
+    // Product Recommendation Demo
+    'Product Recommendation System': 'Système de Recommandation de Produits',
+    'Personalized Shopping Experience': 'Expérience d\'Achat Personnalisée',
+    'Overview': 'Aperçu',
+    'Evaluation': 'Évaluation',
+    'Similarity': 'Similarité',
+    'A/B Test': 'Test A/B',
+    'Select User': 'Sélectionner Utilisateur',
+    'Category': 'Catégorie',
+    'All': 'Tous',
+    'Audio': 'Audio',
+    'Mobile': 'Mobile',
+    'Accessories': 'Accessoires',
+    'Fitness': 'Fitness',
+    'Recommendations': 'Recommandations',
+    'Recent Purchases': 'Achats Récents',
+    'Confidence Score': 'Score de Confiance',
+    'Add to Cart': 'Ajouter au Panier',
+    'View Details': 'Voir Détails',
+    
+    // Credit Risk Demo
+    'Credit Risk Prediction': 'Prédiction du Risque de Crédit',
+    'Financial Risk Assessment': 'Évaluation du Risque Financier',
+    'Risk Score': 'Score de Risque',
+    'Low Risk': 'Risque Faible',
+    'Medium Risk': 'Risque Moyen',
+    'High Risk': 'Risque Élevé',
+    'Analyze': 'Analyser',
+    'Reset': 'Réinitialiser',
+    
+    // Common terms
+    'Loading...': 'Chargement...',
+    'Error': 'Erreur',
+    'Success': 'Succès',
+    'Processing': 'Traitement',
+    'Complete': 'Terminé'
+  },
+  
+  'de': {
+    // Skills page
+    'Technical Skills': 'Technische Fähigkeiten',
+    'Professional expertise in cutting-edge technologies and Machine Learning frameworks': 'Professionelle Expertise in Spitzentechnologien und Machine-Learning-Frameworks',
+    'Machine Learning Models': 'Machine-Learning-Modelle',
+    'Trading & Finance': 'Trading und Finanzen',
+    'Data Science & Engineering': 'Datenwissenschaft und Ingenieurwesen',
+    'Programming Languages': 'Programmiersprachen',
+    'Web Frameworks & APIs': 'Web-Frameworks und APIs',
+    'Databases & Caching': 'Datenbanken und Caching',
+    'DevOps & Cloud': 'DevOps und Cloud',
+    'Languages': 'Sprachen',
+    'Expert': 'Experte',
+    'Advanced': 'Fortgeschritten',
+    'Intermediate': 'Mittelstufe',
+    'Beginner': 'Anfänger',
+    
+    // Product Recommendation Demo
+    'Product Recommendation System': 'Produktempfehlungssystem',
+    'Personalized Shopping Experience': 'Personalisiertes Einkaufserlebnis',
+    'Overview': 'Übersicht',
+    'Evaluation': 'Bewertung',
+    'Similarity': 'Ähnlichkeit',
+    'A/B Test': 'A/B-Test',
+    'Select User': 'Benutzer Auswählen',
+    'Category': 'Kategorie',
+    'All': 'Alle',
+    'Audio': 'Audio',
+    'Mobile': 'Mobil',
+    'Accessories': 'Zubehör',
+    'Fitness': 'Fitness',
+    'Recommendations': 'Empfehlungen',
+    'Recent Purchases': 'Kürzliche Käufe',
+    'Confidence Score': 'Vertrauenswert',
+    'Add to Cart': 'In den Warenkorb',
+    'View Details': 'Details Anzeigen',
+    
+    // Credit Risk Demo
+    'Credit Risk Prediction': 'Kreditrisiko-Vorhersage',
+    'Financial Risk Assessment': 'Finanzrisiko-Bewertung',
+    'Risk Score': 'Risiko-Score',
+    'Low Risk': 'Niedriges Risiko',
+    'Medium Risk': 'Mittleres Risiko',
+    'High Risk': 'Hohes Risiko',
+    'Analyze': 'Analysieren',
+    'Reset': 'Zurücksetzen',
+    
+    // Common terms
+    'Loading...': 'Laden...',
+    'Error': 'Fehler',
+    'Success': 'Erfolg',
+    'Processing': 'Verarbeitung',
+    'Complete': 'Abgeschlossen'
+  },
+  
+  'pl': {
+    // Skills page
+    'Technical Skills': 'Umiejętności Techniczne',
+    'Professional expertise in cutting-edge technologies and Machine Learning frameworks': 'Profesjonalna wiedza z zakresu najnowszych technologii i frameworków Machine Learning',
+    'Machine Learning Models': 'Modele Machine Learning',
+    'Trading & Finance': 'Trading i Finanse',
+    'Data Science & Engineering': 'Nauka o Danych i Inżynieria',
+    'Programming Languages': 'Języki Programowania',
+    'Web Frameworks & APIs': 'Frameworki Web i API',
+    'Databases & Caching': 'Bazy Danych i Buforowanie',
+    'DevOps & Cloud': 'DevOps i Cloud',
+    'Languages': 'Języki',
+    'Expert': 'Ekspert',
+    'Advanced': 'Zaawansowany',
+    'Intermediate': 'Średniozaawansowany',
+    'Beginner': 'Początkujący',
+    
+    // Product Recommendation Demo
+    'Product Recommendation System': 'System Rekomendacji Produktów',
+    'Personalized Shopping Experience': 'Spersonalizowane Doświadczenie Zakupowe',
+    'Overview': 'Przegląd',
+    'Evaluation': 'Ocena',
+    'Similarity': 'Podobieństwo',
+    'A/B Test': 'Test A/B',
+    'Select User': 'Wybierz Użytkownika',
+    'Category': 'Kategoria',
+    'All': 'Wszystkie',
+    'Audio': 'Audio',
+    'Mobile': 'Mobilne',
+    'Accessories': 'Akcesoria',
+    'Fitness': 'Fitness',
+    'Recommendations': 'Rekomendacje',
+    'Recent Purchases': 'Ostatnie Zakupy',
+    'Confidence Score': 'Wynik Pewności',
+    'Add to Cart': 'Dodaj do Koszyka',
+    'View Details': 'Pokaż Szczegóły',
+    
+    // Credit Risk Demo
+    'Credit Risk Prediction': 'Przewidywanie Ryzyka Kredytowego',
+    'Financial Risk Assessment': 'Ocena Ryzyka Finansowego',
+    'Risk Score': 'Wynik Ryzyka',
+    'Low Risk': 'Niskie Ryzyko',
+    'Medium Risk': 'Średnie Ryzyko',
+    'High Risk': 'Wysokie Ryzyko',
+    'Analyze': 'Analizuj',
+    'Reset': 'Resetuj',
+    
+    // Common terms
+    'Loading...': 'Ładowanie...',
+    'Error': 'Błąd',
+    'Success': 'Sukces',
+    'Processing': 'Przetwarzanie',
+    'Complete': 'Zakończone'
+  }
+} as const;
+
+export type DemoLocale = keyof typeof demoTranslations;

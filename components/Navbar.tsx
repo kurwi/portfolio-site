@@ -1,35 +1,36 @@
+'use client';
+
 import Link from 'next/link'
+import { useLanguageCtx } from '@/contexts/LanguageCtx'
+import { t } from '@/lib/translations'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 
 export default function Navbar() {
+  const { locale } = useLanguageCtx()
   return (
-    <header className="sticky top-0 z-50 border-b-2 border-brand-800 bg-white/90 backdrop-blur-md shadow-sm shadow-brand-700/10">
-      <nav className="container h-16 flex items-center justify-between select-none">
-        <Link href="/" className="text-lg font-bold text-slate-900 hover:text-brand-600 transition-colors relative group">
+    <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-blue-200/50">
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-50/50 via-transparent to-blue-50/50 pointer-events-none" />
+      <nav className="container relative h-16 flex items-center justify-between select-none">
+        <Link href="/" className="text-xl font-bold bg-gradient-to-r from-brand-600 to-brand-800 bg-clip-text text-transparent hover:from-brand-500 hover:to-brand-700 transition-all duration-300 relative group">
           <span className="relative z-10">Wojciech Staniszewski</span>
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-600 group-hover:w-full transition-all duration-300"></span>
+          <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-brand-600 to-brand-800 group-hover:w-full transition-all duration-300 rounded-full"></span>
         </Link>
-        <div className="flex gap-8 text-sm font-semibold items-center">
-          <Link href="/about" className="text-slate-900 hover:text-brand-600 transition-colors relative group">
-            About
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-600 group-hover:w-full transition-all duration-300"></span>
+        <div className="flex gap-10 text-sm font-semibold items-center">
+          <Link href="/projects" className="relative text-slate-700 hover:text-brand-600 transition-colors group">
+            {t('Projects', locale)}
+            <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-brand-600 to-brand-800 group-hover:w-full transition-all duration-300 rounded-full"></span>
           </Link>
-          <Link href="/projects" className="text-slate-900 hover:text-brand-600 transition-colors relative group">
-            Projects
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-600 group-hover:w-full transition-all duration-300"></span>
+          <Link href="/skills" className="relative text-slate-700 hover:text-brand-600 transition-colors group">
+            {t('Skills', locale)}
+            <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-brand-600 to-brand-800 group-hover:w-full transition-all duration-300 rounded-full"></span>
           </Link>
-          <Link href="/technical" className="text-slate-900 hover:text-brand-600 transition-colors relative group">
-            Technical
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-600 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link href="/skills" className="text-slate-900 hover:text-brand-600 transition-colors relative group">
-            Skills
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-600 group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link href="/contact" className="px-5 py-2 rounded-sm bg-gradient-to-r from-brand-700 to-brand-800 text-white hover:from-brand-600 hover:to-brand-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 border-l-4 border-brand-900">
-            Contact
+          <LanguageSwitcher />
+          <Link href="/contact" className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-brand-600 to-brand-700 text-white font-semibold hover:from-brand-500 hover:to-brand-600 hover:shadow-lg hover:shadow-brand-600/30 hover:-translate-y-0.5 transition-all duration-200 border border-brand-500/20">
+            {t('Contact', locale)}
           </Link>
         </div>
       </nav>
     </header>
   )
 }
+

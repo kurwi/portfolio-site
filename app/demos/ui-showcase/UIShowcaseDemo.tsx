@@ -367,3 +367,4 @@ function TerminalLayout({ data }: { data: typeof sampleData }) {
     </div>
   )
 }
+

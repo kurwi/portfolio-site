@@ -1,6 +1,8 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useLanguageCtx } from '@/contexts/LanguageCtx'
+import { t } from '@/lib/translations'
 
 interface Product {
   id: number
@@ -32,6 +34,8 @@ const USERS = [
 ]
 
 export default function ProductRecommendationDemo() {
+  const { locale } = useLanguageCtx()
+  const translate = (key: string) => t(key, locale)
   const [activeTab, setActiveTab] = useState<'overview' | 'evaluation' | 'similarity' | 'ab-test'>('overview')
   const [selectedUserId, setSelectedUserId] = useState<number>(USERS[0].id)
   const [category, setCategory] = useState<string>('All')
@@ -57,10 +61,10 @@ export default function ProductRecommendationDemo() {
           </div>
           <div className="flex-1">
             <h1 className="text-5xl font-black uppercase tracking-tight bg-gradient-to-r from-brand-700 to-brand-900 bg-clip-text text-transparent mb-3">
-              Product Recommendation System
+              {t('Product Recommendation System', locale)}
             </h1>
             <p className="text-xl text-slate-700 font-semibold mb-4">
-              Hybrid (Collaborative + Content) Recommendations with Evaluation and A/B Testing
+              {t('Hybrid (Collaborative + Content) Recommendations with Evaluation and A/B Testing', locale)}
             </p>
             <div className="inline-block bg-gradient-to-r from-brand-700 to-brand-900 text-white px-5 py-2 font-bold text-sm uppercase tracking-wider shadow-lg">
               Powered by LightFM Hybrid Model
@@ -97,7 +101,7 @@ export default function ProductRecommendationDemo() {
         <div className="bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl p-5 mb-6">
           <div className="flex items-center justify-between">
             <div className="flex-1">
-              <h3 className="font-black uppercase text-slate-900 mb-3">User Context</h3>
+              <h3 className="font-black uppercase text-slate-900 mb-3">{translate('User Context')}</h3>
               <div className="flex gap-2 mb-4">
                 {USERS.map(u => (
                   <button
@@ -114,7 +118,7 @@ export default function ProductRecommendationDemo() {
                 ))}
               </div>
               <div>
-                <div className="text-xs font-bold text-slate-500 uppercase mb-2">Recent Activity (ID: {selectedUserId})</div>
+                <div className="text-xs font-bold text-slate-500 uppercase mb-2">{translate('Recent Activity')} (ID: {selectedUserId})</div>
                 <div className="flex flex-wrap gap-2">
                   {selectedUser.recent.map(r => (
                     <span key={r} className="px-3 py-1 bg-gradient-to-r from-slate-50 to-blue-50 text-slate-700 text-sm font-semibold border-2 border-blue-200">{r}</span>
@@ -166,8 +170,8 @@ export default function ProductRecommendationDemo() {
             {/* Left: Recommendations list */}
             <div className="col-span-2 bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl">
               <div className="p-4 border-b-2 border-brand-700 bg-gradient-to-r from-slate-50 to-blue-50 flex items-center justify-between">
-                <h3 className="font-black uppercase text-slate-900">Top Recommendations</h3>
-                <span className="text-xs font-bold text-slate-600 uppercase">Personalized for {selectedUser.name}</span>
+                <h3 className="font-black uppercase text-slate-900">{translate('Top Recommendations')}</h3>
+                <span className="text-xs font-bold text-slate-600 uppercase">{translate('Personalized for')} {selectedUser.name}</span>
               </div>
               <div className="p-6 grid grid-cols-2 gap-4">
                 {recommendations.map(p => (
@@ -186,8 +190,8 @@ export default function ProductRecommendationDemo() {
                       <div className="h-2 bg-gradient-to-r from-brand-700 to-brand-900" style={{ width: `${p.score*100}%` }} />
                     </div>
                     <div className="flex items-center justify-between gap-2">
-                      <button className="flex-1 px-3 py-2 text-sm font-bold uppercase bg-white text-slate-700 border-2 border-blue-200 hover:border-brand-700">View similar</button>
-                      <button className="flex-1 px-3 py-2 text-sm font-bold uppercase bg-gradient-to-r from-brand-700 to-brand-900 text-white">Add to cart</button>
+                      <button className="flex-1 px-3 py-2 text-sm font-bold uppercase bg-white text-slate-700 border-2 border-blue-200 hover:border-brand-700">{translate('View similar')}</button>
+                      <button className="flex-1 px-3 py-2 text-sm font-bold uppercase bg-gradient-to-r from-brand-700 to-brand-900 text-white">{translate('Add to cart')}</button>
                     </div>
                   </div>
                 ))}
@@ -219,7 +223,7 @@ export default function ProductRecommendationDemo() {
         {activeTab === 'evaluation' && (
           <div className="grid grid-cols-2 gap-6">
             <div className="bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl p-6">
-              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">Offline Metrics</h3>
+              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">{translate('Offline Metrics')}</h3>
               <ul className="text-sm text-slate-700 list-disc pl-5 space-y-2 mb-4 font-semibold">
                 <li>Precision@k and Recall@k over k=1..20</li>
                 <li>NDCG over time by weekly retrains</li>
@@ -231,7 +235,7 @@ export default function ProductRecommendationDemo() {
               </div>
             </div>
             <div className="bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl p-6">
-              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">Online Metrics</h3>
+              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">{translate('Online Metrics')}</h3>
               <ul className="text-sm text-slate-700 list-disc pl-5 space-y-2 mb-4 font-semibold">
                 <li>CTR on recommended widgets</li>
                 <li>Conversion rate and AOV impact</li>
@@ -248,13 +252,13 @@ export default function ProductRecommendationDemo() {
         {activeTab === 'similarity' && (
           <div className="grid grid-cols-2 gap-6">
             <div className="bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl p-6">
-              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">Similar Items (Content-Based)</h3>
+              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">{translate('Similar Items (Content-Based)')}</h3>
               <div className="h-64 bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center border-2 border-blue-100">
                 <div className="text-slate-400 text-sm font-semibold">Embedding space visualization</div>
               </div>
             </div>
             <div className="bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl p-6">
-              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">Frequently Bought Together</h3>
+              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">{translate('Frequently Bought Together')}</h3>
               <div className="h-64 bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center border-2 border-blue-100">
                 <div className="text-slate-400 text-sm font-semibold">Co-occurrence network</div>
               </div>
@@ -266,7 +270,7 @@ export default function ProductRecommendationDemo() {
         {activeTab === 'ab-test' && (
           <div className="grid grid-cols-3 gap-6">
             <div className="col-span-2 bg-white border-l-[6px] border-brand-700 border-t-2 border-r-2 border-b-2 border-blue-200 shadow-xl p-6">
-              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">A/B Test Results</h3>
+              <h3 className="font-black uppercase text-slate-900 mb-4 pb-2 border-b-2 border-brand-700">{translate('A/B Test Results')}</h3>
               <div className="h-72 bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center border-2 border-blue-100">
                 <div className="text-slate-400 text-sm font-semibold">Cumulative conversion lift chart</div>
               </div>
@@ -280,7 +284,7 @@ export default function ProductRecommendationDemo() {
                 <li>AOV increase: +12%</li>
                 <li>Duration: 2 weeks</li>
               </ul>
-              <button className="w-full px-4 py-3 text-sm font-bold uppercase bg-gradient-to-r from-brand-700 to-brand-900 text-white shadow-lg hover:shadow-xl transition-all">Promote Variant</button>
+              <button className="w-full px-4 py-3 text-sm font-bold uppercase bg-gradient-to-r from-brand-700 to-brand-900 text-white shadow-lg hover:shadow-xl transition-all">{translate('Promote Variant')}</button>
             </div>
           </div>
         )}
@@ -288,3 +292,4 @@ export default function ProductRecommendationDemo() {
     </div>
   )
 }
+

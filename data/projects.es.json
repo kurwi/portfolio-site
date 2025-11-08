@@ -1,0 +1,172 @@
+[
+  {
+    "slug": "credit-risk-prediction-platform",
+    "title": "Plataforma de Predicción de Riesgo Crediticio",
+    "summary": "ML listo para producción con validación, umbralización sensible al costo y explicabilidad.",
+    "description": "Sistema integral de puntuación de riesgo crediticio que alcanza 0.89 AUC-ROC en datos de prueba. Procesa más de 30 características (ingresos, historial crediticio, ratio deuda-ingresos) a través de un pipeline de preprocesamiento validado. Modelo XGBoost optimizado con Optuna (500 pruebas) y ajuste de umbral sensible al costo—acepta préstamos con ganancia prevista > $0. Valores SHAP explican predicciones para reguladores y oficiales de préstamos.",
+    "demoId": "credit-risk",
+    "tech": ["Python", "XGBoost", "scikit-learn", "Optuna", "pandas", "SHAP", "pytest", "Docker"],
+    "impact": [
+      "Redujo pérdida esperada en 18% mediante umbral sensible al costo (0.42 vs. 0.50 predeterminado)",
+      "89% AUC-ROC, 76% precisión, 81% recall en conjunto de prueba",
+      "Las explicaciones SHAP satisfacen requisitos de transparencia regulatoria",
+      "Pipeline de datos validado con 95% cobertura de pruebas previene fallas silenciosas"
+    ],
+    "links": [
+      { "label": "Repositorio GitHub", "href": "https://github.com/kurwi" }
+    ]
+  },
+  {
+    "slug": "sales-analytics-platform", 
+    "title": "Plataforma de Análisis de Ventas",
+    "summary": "Dashboards en tiempo real, pronósticos y insights impulsados por IA para equipos de ventas.",
+    "description": "Aplicación interactiva Dash que proporciona análisis de ventas en tiempo real para más de 50 representantes en 12 regiones. Pronostica ingresos del próximo trimestre usando modelos ARIMA/Prophet (12% MAPE). Los dashboards se actualizan cada 30 segundos vía WebSocket, mostrando salud del pipeline, clasificaciones de representantes, progresión de tratos y análisis de victorias/pérdidas.",
+    "demoId": "sales-analytics",
+    "tech": ["Python", "Dash", "Pandas", "Plotly", "FastAPI", "Prophet", "Redis", "PostgreSQL", "Docker"],
+    "impact": [
+      "Mejoró precisión de pronóstico de 22% a 12% MAPE con modelos de series temporales Prophet",
+      "Dashboards cargan en <500ms (p95) sirviendo a 50+ usuarios concurrentes vía cache Redis",
+      "Ops de ventas identifica cuellos de botella 3× más rápido con visibilidad de pipeline en tiempo real",
+      "Reportes automáticos semanales ahorran 8 horas/semana de trabajo manual en Excel"
+    ],
+    "links": [
+      { "label": "Repositorio GitHub", "href": "https://github.com/kurwi" }
+    ]
+  },
+  {
+    "slug": "email-automation-platform",
+    "title": "Plataforma de Automatización de Email",
+    "summary": "Campañas empresariales multicanal con pruebas A/B y análisis.",
+    "description": "Sistema de automatización de marketing de grado de producción que maneja más de 50K mensajes diarios a través de email, SMS y notificaciones push. Incluye constructor de campañas con plantillas drag-and-drop, pruebas A/B con validación chi-cuadrado, dashboard de análisis en tiempo real mostrando tasas de apertura (promedio 24%), tasas de click (8%) y seguimiento de conversiones.",
+    "demoId": "marketing-automation",
+    "tech": ["Python", "Flask", "Twilio", "Brevo", "SQLite", "Celery", "Redis"],
+    "impact": [
+      "Incrementó conversión de campañas en 35% mediante pruebas A/B y segmentación",
+      "Redujo costos de mensajería en 40% con limitación de tasa y pooling de conexiones",
+      "Logs de auditoría listos para cumplimiento GDPR/CAN-SPAM con retención de 90 días",
+      "Maneja 50K+ mensajes/día con 99.2% tasa de entrega"
+    ],
+    "links": [
+      { "label": "Repositorio GitHub", "href": "https://github.com/kurwi" }
+    ]
+  },
+  {
+    "slug": "marketing-campaign-analytics",
+    "title": "Análisis de Campañas de Marketing",
+    "summary": "Análisis de campañas con vistas de cohorte, seguimiento de ROI y verificaciones de calidad de datos.",
+    "description": "Plataforma de atribución multi-touch que analiza más de 500K recorridos de clientes a través de 8 canales (orgánico, búsqueda pagada, social, email, display, referencia, directo, afiliado). El modelo de cadena de Markov asigna crédito fraccional a cada punto de contacto. Análisis de cohorte rastrea retención y LTV por fuente de adquisición.",
+    "demoId": "nlp-platform", 
+    "tech": ["Python", "FastAPI", "Pandas", "NumPy", "Prometheus", "Grafana", "PostgreSQL", "Airflow"],
+    "impact": [
+      "Incrementó ROI de marketing 28% reasignando presupuesto de display ($1.80 ROI) a email ($8.50 ROI)",
+      "Atribución Markov reveló valor de Facebook en mid-funnel (45% crédito vs. 12% último clic)",
+      "Alertas de calidad de datos detectaron 12 problemas críticos antes de impactar decisiones (promedio 4hr detección)",
+      "Reportes automáticos ahorran 15 horas/semana de análisis manual"
+    ],
+    "links": [
+      { "label": "Repositorio GitHub", "href": "https://github.com/kurwi" }
+    ]
+  },
+  {
+    "slug": "customer-scoring-system",
+    "title": "Sistema de Puntuación de Clientes", 
+    "summary": "API de puntuación predictiva con inferencia en tiempo real y monitoreo.",
+    "description": "API de puntuación en tiempo real sirviendo más de 5K predicciones/día con latencia p95 <50ms. Clasificador Random Forest (0.84 AUC) predice riesgo de abandono de clientes a partir de 25 características comportamentales (frecuencia de login, tickets de soporte, retrasos de pago, uso de características). FastAPI maneja solicitudes concurrentes con workers asíncronos.",
+    "demoId": "ab-test",
+    "tech": ["Python", "FastAPI", "scikit-learn", "MLflow", "Prometheus", "Evidently", "Docker", "Kubernetes"],
+    "impact": [
+      "Latencia API p95 <50ms habilita decisiones en tiempo real en apps orientadas al cliente",
+      "Mejoró predicción de abandono de 76% a 84% AUC mediante ingeniería de características (ventanas deslizantes, términos de interacción)",
+      "Framework de pruebas A/B valida de forma segura nuevos modelos antes del despliegue completo (2 incidentes de producción evitados)",
+      "Monitoreo de deriva detectó error de pipeline de datos en 6 horas (antes de impactar decisiones)"
+    ],
+    "links": [
+      { "label": "Repositorio GitHub", "href": "https://github.com/kurwi" }
+    ]
+  },
+  {
+    "slug": "product-recommendation-system",
+    "title": "Sistema de Recomendación de Productos",
+    "summary": "Recomendaciones personalizadas con evaluación offline/online.",
+    "description": "Motor de recomendaciones híbrido sirviendo a más de 50K usuarios con más de 10K productos. Combina filtrado colaborativo (similitud usuario-usuario) con basado en contenido (atributos de producto: categoría, precio, marca). El modelo LightFM usa feedback implícito (vistas, clics, compras) ponderado por recencia. Maneja arranque en frío vía características de contenido para ítems nuevos y fallback de popularidad para usuarios nuevos.",
+    "demoId": "anomaly",
+    "tech": ["Python", "LightFM", "Implicit", "Pandas", "Redis", "FastAPI", "Spark", "Airflow"],
+    "impact": [
+      "Incrementó AOV en 12% ($18 por orden) mediante recomendaciones de venta cruzada personalizadas",
+      "Modelo híbrido mejoró CTR 18% sobre línea base de popularidad (28% vs. 24% click-through en recs)",
+      "Estrategia de arranque en frío mantiene 85% del rendimiento de usuario cálido para usuarios nuevos (NDCG 0.36 vs. 0.42)",
+      "Cobertura de catálogo 78% (7.8K de 10K productos recomendados al menos una vez por semana)"
+    ],
+    "links": [
+      { "label": "Repositorio GitHub", "href": "https://github.com/kurwi" }
+    ]
+  },
+  {
+    "slug": "customer-behavior-automation",
+    "title": "Automatización de Comportamiento del Cliente",
+    "summary": "Flujos de trabajo dirigidos por eventos para mensajería del ciclo de vida del cliente.",
+    "description": "Sistema dirigido por eventos que automatiza comunicación del ciclo de vida del cliente a través de 8 tipos de disparadores (registro, hito de onboarding, inactividad, abandono de carrito, recordatorio de renovación, prompt de upgrade, solicitud de feedback, recuperación). Workers Celery procesan más de 20K eventos/día con latencia promedio de 2 minutos.",
+    "demoId": "customer-behavior",
+    "tech": ["Python", "Flask", "Celery", "Redis", "PostgreSQL", "SendGrid", "Twilio", "Firebase", "Prometheus"],
+    "impact": [
+      "Redujo abandono en 14% mediante intervenciones oportunas de riesgo (disparadores de inactividad, recordatorios de renovación)",
+      "Incrementó conversión de prueba a pago 22% con secuencia de onboarding automatizada (serie de 3 emails)",
+      "Recuperación de abandono de carrito: 18% de carritos abandonados convertidos ($45K ingresos mensuales recuperados)",
+      "Procesa 20K+ eventos/día con 99.5% tasa de éxito, 2-min latencia promedio (evento → acción)"
+    ],
+    "links": [
+      { "label": "Repositorio GitHub", "href": "https://github.com/kurwi" }
+    ]
+  },
+  {
+    "slug": "marketing-automation-platform",
+    "title": "Plataforma de Automatización de Marketing",
+    "summary": "Automatización integral con segmentación, orquestación y reportes.",
+    "description": "Plataforma integral de automatización de marketing gestionando más de 80 campañas activas para más de 200K contactos. Motor de segmentación dinámico construye audiencias vía reglas tipo SQL en más de 100 atributos (demográficos, comportamiento, transacciones, campos personalizados). Orquestación de campañas multi-paso con ramificación condicional, delays y disparadores.",
+    "demoId": "nlp",
+    "tech": ["Python", "FastAPI", "Pandas", "PostgreSQL", "Celery", "Redis", "React", "SendGrid", "Twilio", "OneSignal"],
+    "impact": [
+      "Incrementó LTV de cliente 26% ($180 → $227) mediante secuencias de nurturing personalizadas y upsell",
+      "Orquestación de campañas maneja 2M+ envíos/mes con 99.7% entregabilidad",
+      "Motor de segmentación construye audiencias en <5 seg (cacheado), soporta 100+ criterios de filtro",
+      "Atribución de ingresos muestra $340K directamente ligados a campañas automatizadas (15% de ingresos totales)"
+    ],
+    "links": [
+      { "label": "Repositorio GitHub", "href": "https://github.com/kurwi" }
+    ]
+  },
+  {
+    "slug": "reinforcement-learning-trading-bot",
+    "title": "Bot de Trading con Aprendizaje por Refuerzo",
+    "summary": "Sistema de trading impulsado por IA con aprendizaje por refuerzo profundo para gestión óptima de portafolios.",
+    "description": "Bot de trading avanzado usando algoritmo Proximal Policy Optimization (PPO) para aprender estrategias de trading óptimas a partir de datos históricos del mercado. Entrenado en 10 años de datos del S&P 500 con indicadores técnicos (RSI, MACD, Bandas de Bollinger) y análisis de sentimiento. Logra 15% retorno anual vs. 10% benchmark buy-and-hold.",
+    "demoId": "trading-bot",
+    "tech": ["Python", "Stable-Baselines3", "Gym", "Pandas", "NumPy", "TA-Lib", "Backtrader", "Alpaca", "MLflow", "Docker"],
+    "impact": [
+      "15% retorno anualizado vs. 10% benchmark buy-and-hold en backtest de 5 años",
+      "Redujo drawdown máximo de 25% a 12% mediante políticas de gestión de riesgo",
+      "Ratio Sharpe mejorado de 0.8 a 1.4 con retornos ajustados por volatilidad",
+      "Maneja 500+ señales concurrentes con latencia de decisión <100ms"
+    ],
+    "links": [
+      { "label": "Repositorio GitHub", "href": "https://github.com/kurwi" }
+    ]
+  },
+  {
+    "slug": "ui-design-showcase",
+    "title": "Showcase de Diseño de UI",
+    "summary": "Demostración interactiva de diferentes patrones de diseño de UI aplicados a los mismos datos",
+    "description": "Explora cómo el mismo contenido puede estructurarse de múltiples formas. Este showcase demuestra 6 arquitecturas de layout diferentes: grilla de tarjetas, navegación lateral, vista dividida, tabla compacta, layout asimétrico y estilo terminal. Cada layout sirve diferentes casos de uso y preferencias de usuario mientras presenta información idéntica.",
+    "demoId": "ui-showcase",
+    "tech": ["React", "TypeScript", "Tailwind CSS", "Diseño de Componentes"],
+    "impact": [
+      "6 layouts estructurales distintos para el mismo contenido",
+      "Cambio de layout en tiempo real",
+      "Patrones de diseño responsivo",
+      "Demuestra flexibilidad y modularidad de UI"
+    ],
+    "links": [
+      { "label": "Repositorio GitHub", "href": "https://github.com/kurwi" }
+    ]
+  }
+]
