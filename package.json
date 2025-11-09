@@ -7,7 +7,7 @@
     "dev:watch": "node scripts/run-dev.js",
     "dev:fast": "NODE_OPTIONS='--max-old-space-size=4096' TURBOPACK=1 next dev -p 3000 --turbo",
     "build": "next build",
-    "start": "next start -p 3000",
+    "start": "node scripts/start.js",
     "lint": "next lint"
   },
   "engines": {
