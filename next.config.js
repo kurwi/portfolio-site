@@ -3,13 +3,13 @@ const securityHeaders = [
   {
     key: 'Content-Security-Policy',
     value: [
-      "default-src 'self'", // base
-      "script-src 'self'", // no remote scripts
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com", // allow Google Fonts CSS
-      "font-src 'self' https://fonts.gstatic.com", // allow font files
-      "img-src 'self' data: blob:", // images + inline data
-      "connect-src 'self'", // API calls local only
-      "frame-ancestors 'none'", // prevent embedding
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-eval' 'unsafe-inline'", // Next.js requires eval and inline scripts
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' https://fonts.gstatic.com",
+      "img-src 'self' data: blob:",
+      "connect-src 'self'",
+      "frame-ancestors 'none'",
       'upgrade-insecure-requests'
     ].join('; ')
   },
